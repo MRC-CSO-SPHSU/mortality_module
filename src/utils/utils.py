@@ -22,7 +22,7 @@ def read_census_data(file_name: str, sheet_name: str, sex: str) -> DataFrame:
         A DataFrame that contains age groups, the total number of people per
         group and their sex.
     """
-    
+
     wb = load_workbook(filename=file_name)
     sheet_ranges = wb[sheet_name]
 
