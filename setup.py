@@ -17,9 +17,9 @@ setup(
     description="Population dynamics",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    # url="https://github.com/pypa/sampleproject",
-    # author="A. Random Developer",
-    # author_email="author@example.com",
+    url="https://github.com/MRC-CSO-SPHSU/mortality_module",
+    author="Vladimir Khodygo",
+    author_email="vladimir.khodygo@glasgow.ac.uk",
     classifiers=[
         "Development Status :: 1 - Planning",
         "Intended Audience :: Science/Research",
@@ -36,6 +36,5 @@ setup(
         "dev": ["check-manifest"],
         "test": ["coverage"],
     },
-    # package_data={"sample": ["package_data.dat"],},
-    # data_files=[("my_data", ["data/data_file"])],
+    package_data={"data": ["uk_2011_census_trimmed.csv"]},
 )
