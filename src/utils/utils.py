@@ -4,6 +4,25 @@ import numpy as np
 
 
 def read_census_data(file_name: str, sheet_name: str, sex: str) -> DataFrame:
+    """A utility function to read data from UK 2011 census files.
+
+    Parameters
+    ----------
+    file_name : str
+        The filename, this must be an "*.xlsx" file.
+    sheet_name : str
+        The sheet name.
+    sex: str
+        A string that encodes the sex of participants, the same for the whole
+        group.
+
+    Returns
+    -------
+    DataFrame
+        A DataFrame that contains age groups, the total number of people per
+        group and their sex.
+    """
+    
     wb = load_workbook(filename=file_name)
     sheet_ranges = wb[sheet_name]
 
