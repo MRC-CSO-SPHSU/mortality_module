@@ -21,6 +21,12 @@ def read_census_data(file_name: str, sheet_name: str, sex: str) -> DataFrame:
     DataFrame
         A DataFrame that contains age groups, the total number of people per
         group and their sex.
+
+    Raises
+    ------
+    AssertionError
+        When sums of ages in different age bands do not match their control
+        values.
     """
 
     wb = load_workbook(filename=file_name)
