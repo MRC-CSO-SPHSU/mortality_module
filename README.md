@@ -12,4 +12,10 @@ sample [project](https://github.com/pypa/sampleproject/commit/d4ee05fdc03e848ed6
 ## Data
 All data provided is publicly available, see:
 
- - UK 2011 [Census](https://www.ons.gov.uk/census/2011census/2011censusdata)
+### Population pyramid
+UK 2011 [Census](https://www.ons.gov.uk/census/2011census/2011censusdata).
+### Mortality Rates
+UK [Life Tables](https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/lifeexpectancies/datasets/lifetablesprincipalprojectionunitedkingdom) 2020;
+#### Note
+Mortality rates tables require a password to get access to, this can be fixed by
+converting the document to `*.xlsx`.
