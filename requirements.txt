@@ -2,4 +2,4 @@ openpyxl~=3.0.10
 setuptools~=63.4.3
 pandas~=1.4.4
 numpy~=1.23.4
-nptyping~=2.2.0
+nptyping~=2.3.1
