@@ -36,5 +36,5 @@ setup(
         "dev": ["check-manifest"],
         "test": ["coverage"],
     },
-    package_data={"data": ["uk_2011_census_trimmed.csv"]},
+    package_data={"data": ["uk_2011_census.csv", "uk_2020_mortality.csv"]},
 )
