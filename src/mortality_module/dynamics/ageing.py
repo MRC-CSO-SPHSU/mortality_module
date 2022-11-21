@@ -33,7 +33,7 @@ class Ageing:
             range(self.start_year, (self.end_year + 2)), SEX_LABELS, AGE_GROUPS
         )
 
-        self.index = [(age, sex, year_) for age, sex, year_ in indices]
+        self.index = [(year_, sex, age) for year_, sex, age in indices]
 
         mi = MultiIndex.from_tuples(self.index, names=("year", "sex", "age_group"))
         columns = ["people_total", "mortality_rate", "dead_within_year"]
