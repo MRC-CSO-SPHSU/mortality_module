@@ -93,7 +93,7 @@ class Ageing:
             dead *= self.df.loc[year, ["mortality_rate"]].values
 
             dead /= 100_000
-            dead = dead.apply(lambda row: ceil(row)).astype('uint32')
+            dead = dead.apply(lambda row: ceil(row)).astype("uint32")
             self.df.loc[year, "dead_within_year"] = dead.values
 
             # calculate pop - deaths next year and age it
@@ -103,12 +103,15 @@ class Ageing:
             pop_next_year = pop_next_year.groupby(level=0).shift(1)
 
             births_next_year = self.birth_numbers.loc[year]
-            births_next_year.rename(columns={"birth_number": "people_total"},
-                                    inplace=True)
+            births_next_year.rename(
+                columns={"birth_number": "people_total"}, inplace=True
+            )
 
             pop_next_year.update(births_next_year)
 
-            self.df.loc[[year + 1], "people_total"] = pop_next_year["people_total"].values
+            self.df.loc[[year + 1], "people_total"] = pop_next_year[
+                "people_total"
+            ].values
 
         return self.df
 
@@ -164,11 +167,12 @@ if __name__ == "__main__":
     colors = pl.cm.jet(np.linspace(0, 1, 11))
 
     for i, year in enumerate(range(2011, (2020 + 1))):
-        data.loc[(year, "f", slice(None))]["people_total"].plot(color=colors[i], figsize=(32, 24),  fontsize=26, label=str(year))
+        data.loc[(year, "f", slice(None))]["people_total"].plot(
+            color=colors[i], figsize=(32, 24), fontsize=26, label=str(year)
+        )
 
-    pl.grid(axis='both', color='0.95')
-    pl.legend(title='Year of study:')
+    pl.grid(axis="both", color="0.95")
+    pl.legend(title="Year of study:")
     pl.title("Number of people per age group")
     pl.savefig("result.png")
-    #pl.show()
-
+    # pl.show()

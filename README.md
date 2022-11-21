@@ -9,10 +9,13 @@ See PyPa
 sample [project](https://github.com/pypa/sampleproject/commit/d4ee05fdc03e848ed6e7065d8fe8e833a3c8c0b2)
 .
 
+## Code Style
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 ## Data
 All data provided is publicly available, see:
 
-### Population Syramid
+### Population Pyramid
  - UK 2011 [Census](https://www.ons.gov.uk/census/2011census/2011censusdata).
 ### Mortality Rates
  - UK [Life Tables](https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/lifeexpectancies/datasets/lifetablesprincipalprojectionunitedkingdom) 2020.
