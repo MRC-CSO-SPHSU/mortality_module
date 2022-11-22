@@ -1,9 +1,10 @@
-from numpy import uint16, ceil, linspace
+from numpy import uint16, uint32, ceil, linspace
 from pandas import DataFrame, MultiIndex
 from itertools import product
 import mortality_module
 from mortality_module.utils.constants import AGE_GROUPS, SEX_LABELS
 import matplotlib.pylab as plt
+import warnings
 
 
 class Ageing:
@@ -40,17 +41,33 @@ class Ageing:
         self.df = DataFrame(index=mi, columns=columns)
 
     def _validate_dates(self) -> None:
-        # 2011 and last year in mort table inclusive
-        pass
+        if not isinstance(self.start_year, uint16):
+            raise TypeError("Starting point is not a uint16")
+
+        if not isinstance(self.end_year, uint16):
+            raise TypeError("Ending point is not a uint16")
+
+        if self.start_year != 2011:
+            warnings.warn(f"Warning: current code considers only year 2011 as a"
+                          f" valid starting point")
+
+        if self.end_year <= self.start_year:
+            raise ValueError("Invalid order of years")
 
     def _validate_population_pyramid(self) -> None:
-        pass
+        if not isinstance(self.pop, DataFrame):
+            raise TypeError(f"Population pyramid must be supplied in the form"
+                            f" of a DataFrame")
 
     def _validate_mortality_rates(self) -> None:
-        pass
+        if not isinstance(self.mortality, DataFrame):
+            raise TypeError(f"Mortality must be supplied in the form of a"
+                            f" DataFrame")
 
     def _validate_birth_numbers(self) -> None:
-        pass
+        if not isinstance(self.birth_numbers, DataFrame):
+            raise TypeError(f"Birth numbers must be supplied in the form of a"
+                            f" DataFrame")
 
     def _increment_age(self, df: DataFrame) -> DataFrame:
         pass
