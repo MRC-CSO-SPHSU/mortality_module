@@ -13,8 +13,8 @@ class Ageing:
         population_pyramid: DataFrame,
         mortality_rates: DataFrame,
         birth_numbers: DataFrame,
-        start_year: uint16 = 2011,
-        end_year: uint16 = 2020,
+        start_year: uint16 = uint16(2011),
+        end_year: uint16 = uint16(2020),
     ):
 
         self.pop = population_pyramid
