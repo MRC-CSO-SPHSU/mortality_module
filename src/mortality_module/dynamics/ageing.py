@@ -1,4 +1,4 @@
-from numpy import uint16, uint32, ceil, linspace
+from numpy import uint16, ceil, linspace
 from pandas import DataFrame, MultiIndex
 from itertools import product
 import mortality_module
