@@ -2,7 +2,7 @@ from numpy import uint16, ceil, linspace
 from pandas import DataFrame, MultiIndex
 from itertools import product
 import mortality_module
-from mortality_module.utils.constants import AGE_GROUPS, SEX_LABELS
+from mortality_module.utils.constants import AGE_GROUPS, SEX_LABELS, COUNTRY_CODES
 import matplotlib.pylab as plt
 import warnings
 
@@ -31,12 +31,19 @@ class Ageing:
         self._validate_dates()
 
         indices = product(
-            range(self.start_year, (self.end_year + 2)), SEX_LABELS, AGE_GROUPS
+            range(self.start_year, (self.end_year + 2)),
+            SEX_LABELS,
+            AGE_GROUPS,
+            COUNTRY_CODES,
         )
 
-        self.index = [(year_, sex, age) for year_, sex, age in indices]
+        self.index = [
+            (year_, sex, age, country_name) for year_, sex, age, country_name in indices
+        ]
 
-        mi = MultiIndex.from_tuples(self.index, names=("year", "sex", "age_group"))
+        mi = MultiIndex.from_tuples(
+            self.index, names=("year", "sex", "age_group", "country")
+        )
         columns = ["people_total", "mortality_rate", "dead_within_year"]
         self.df = DataFrame(index=mi, columns=columns)
 
@@ -48,26 +55,31 @@ class Ageing:
             raise TypeError("Ending point is not a uint16")
 
         if self.start_year != 2011:
-            warnings.warn(f"Warning: current code considers only year 2011 as a"
-                          f" valid starting point")
+            warnings.warn(
+                f"Warning: current code considers only year 2011 as a"
+                f" valid starting point"
+            )
 
         if self.end_year <= self.start_year:
             raise ValueError("Invalid order of years")
 
     def _validate_population_pyramid(self) -> None:
         if not isinstance(self.pop, DataFrame):
-            raise TypeError(f"Population pyramid must be supplied in the form"
-                            f" of a DataFrame")
+            raise TypeError(
+                "Population pyramid must be supplied in the form of a DataFrame"
+            )
 
     def _validate_mortality_rates(self) -> None:
         if not isinstance(self.mortality, DataFrame):
-            raise TypeError(f"Mortality must be supplied in the form of a"
-                            f" DataFrame")
+            raise TypeError(
+                "Mortality must be supplied in the form of a DataFrame"
+            )
 
     def _validate_birth_numbers(self) -> None:
         if not isinstance(self.birth_numbers, DataFrame):
-            raise TypeError(f"Birth numbers must be supplied in the form of a"
-                            f" DataFrame")
+            raise TypeError(
+                "Birth numbers must be supplied in the form of a DataFrame"
+            )
 
     def _increment_age(self, df: DataFrame) -> DataFrame:
         pass
@@ -99,7 +111,7 @@ class Ageing:
             # at the moment all people who reach 100 die immediately.
             pop_next_year = self.df.loc[year_, ["people_total"]]
             pop_next_year -= self.df.loc[year_, ["dead_within_year"]].values
-            pop_next_year = pop_next_year.groupby(level=0).shift(1)
+            pop_next_year = pop_next_year.groupby(level=[0, 2]).shift(1)
 
             births_next_year = self.birth_numbers.loc[year_]
             births_next_year.rename(
@@ -124,14 +136,34 @@ if __name__ == "__main__":
     data.to_csv("result.csv")
 
     plt.figure()
-    colors = plt.cm.jet(linspace(0, 1, 11))
+    colors = plt.cm.jet(linspace(0, 1, 44))
 
     for i, year in enumerate(range(2011, (2020 + 1))):
-        data.loc[(year, "f", slice(None))]["people_total"].plot(
-            color=colors[i], figsize=(32, 24), fontsize=26, label=str(year)
+        data.loc[(year, "f", slice(None), "e")]["people_total"].plot(
+            color=colors[i],
+            figsize=(16, 12),
+            fontsize=30,
+            label="e " + str(year),
+            logy=True,
+        )
+
+    for i, year in enumerate(range(2011, (2020 + 1))):
+        data.loc[(year, "f", slice(None), "w")]["people_total"].plot(
+            color=colors[i + 11], figsize=(16, 12), fontsize=30, label="w " + str(year)
+        )
+
+    for i, year in enumerate(range(2011, (2020 + 1))):
+        data.loc[(year, "f", slice(None), "s")]["people_total"].plot(
+            color=colors[i + 22], figsize=(16, 12), fontsize=30, label="s " + str(year)
+        )
+
+    for i, year in enumerate(range(2011, (2020 + 1))):
+        data.loc[(year, "f", slice(None), "ni")]["people_total"].plot(
+            color=colors[i + 33], figsize=(16, 12), fontsize=30, label="ni " + str(year)
         )
 
     plt.grid(axis="both", color="0.95")
     plt.legend(title="Year of study:")
     plt.title("Number of people per age group")
+    # plt.show()
     plt.savefig("result.png")

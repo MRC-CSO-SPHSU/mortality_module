@@ -12,14 +12,18 @@ def load_census_data() -> DataFrame:
 
         age_group       101 non-null object;
 
+        country         4 non-null object;
+
     Contains the following field:
-        people_total    202 non-null uint32;
+        people_total    808 non-null uint32;
     """
 
-    with resources.path("mortality_module.data", "uk_2011_census.csv") as f:
-        df = read_csv(f).set_index(["year", "sex", "age_group"])
-        df.people_total = df.people_total.astype("uint32")
-    return df.astype("uint32")
+    with resources.path(
+        "mortality_module.data", "uk_2011_census_age_sex_country.csv"
+    ) as f:
+        df = read_csv(f).set_index(["year", "sex", "age_group", "country"])
+        df["people_total"] = df["people_total"].astype("uint32")
+    return df
 
 
 def load_mortality_rates() -> DataFrame:
@@ -32,12 +36,14 @@ def load_mortality_rates() -> DataFrame:
 
         age_group       101 non-null object;
 
+        country         4 non-null object;
+
     Contains the following field:
-        mortality_rate    49490 non-null float64;
+        mortality_rate    72720 non-null float64;
     """
 
-    with resources.path("mortality_module.data", "uk_2020_mortality.csv") as f:
-        df = read_csv(f).set_index(["year", "sex", "age_group"])
+    with resources.path("mortality_module.data", "uk_2022_mortality_rates.csv") as f:
+        df = read_csv(f).set_index(["year", "sex", "age_group", "country"])
     return df
 
 
@@ -51,12 +57,13 @@ def load_birth_numbers() -> DataFrame:
 
         age_group       1 non-null object;
 
+        country         4 non-null object;
+
     Contains the following field:
-        birth_number    22 non-null uint32;
+        birth_number    168 non-null uint32;
     """
 
-    with resources.path("mortality_module.data", "uk_2020_birth.csv") as f:
+    with resources.path("mortality_module.data", "uk_2021_births.csv") as f:
         df = read_csv(f)
-
-    df["age_group"] = df["age_group"].astype(str)
-    return df.set_index(["year", "sex", "age_group"]).astype("uint32")
+        df["age_group"] = df["age_group"].astype(str)
+    return df.set_index(["year", "sex", "age_group", "country"]).astype("uint32")
