@@ -1,3 +1,4 @@
+import uuid
 from abc import ABC, abstractmethod
 import numpy as np
 import random
@@ -6,10 +7,12 @@ class Synthesizer(ABC):
     def __init__(self, seed=1337):
         self._rng = random.Random()
         self._rng_seed = seed
-        self._update_rng_state()
+
+        self._update_rng_state() # ensure the same data generated every time we run this from scratch
 
         self._raw_data = None
         self._df = None
+        self._data = None
 
     def _update_rng_state(self):
         self._rng.seed(self._rng_seed)
@@ -34,7 +37,7 @@ class Synthesizer(ABC):
         pass
 
     @abstractmethod
-    def extract_columns(self, column_names):
+    def extract_subset(self, column_names, hh_codes):
         pass
 
     @abstractmethod
@@ -44,3 +47,20 @@ class Synthesizer(ABC):
     @abstractmethod
     def generate_new_population(self):
         pass
+
+    @abstractmethod
+    def data_preprocessing(self):
+        pass
+
+    def generate_hh_id(self, ss: int) -> list:
+        return [uuid.UUID(int=self._rng.getrandbits(128)) for _ in range(ss)]
+
+    @staticmethod
+    def _age_range(data):
+        age_min = min(data)
+        age_max = max(data)
+
+        num_bins = age_max - age_min + 1
+        range_ = [age_min, age_max + 1]
+
+        return num_bins, range_
