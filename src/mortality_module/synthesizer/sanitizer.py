@@ -1,4 +1,15 @@
+import numpy as np
+import pandas as pd
+
+
 class Sanitizer:
+    @classmethod
+    def household_size(cls, dataset: pd.DataFrame, id_column_name: str,
+                       expected_size: int):
+        t = dataset[id_column_name]
+        return [id_ for id_ in np.unique(t) if
+                t[t == id_].size != expected_size]
+
     @classmethod
     def age(cls, data, age_min, age_max):
         # non negative, less than 100?
