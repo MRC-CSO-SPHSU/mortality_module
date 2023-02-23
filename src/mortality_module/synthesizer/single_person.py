@@ -4,6 +4,7 @@ import math as m
 import numpy as np
 import pandas as pd
 from scipy import stats
+from tqdm import tqdm
 
 from mortality_module.synthesizer.abstract.base_synthesizer import Synthesizer
 from mortality_module.synthesizer.utils import data_range
@@ -17,15 +18,27 @@ class UKSinglePersonHH(Synthesizer):
         super().__init__(seed)
 
     def run_sanity_checks(self):
-        pass
+        bad_ids = self._validate_household_size(self._data)
+        if len(bad_ids) > 0:
+            print("""Households with inconsistent number of people have been
+             found, filtering them out.""")
+
+    @staticmethod
+    def _validate_household_size(dataset):
+        """Ensures that every household is composed of one person only."""
+        # return Sanitizer.household_size(dataset, 'HSERIALP', 1)
+        return []
+
+    # todo add soft check, there is no such column in APS, LFS only
 
     def augment_data(self):
         raise NotImplementedError("No augmentation is needed.")
 
     def generate_new_population(self) -> pd.DataFrame:
         self.data_preprocessing()
-        self.extract_subset(('COUNTRY', 'SEX', 'AGE', 'PHHWTA14'), 1,
+        self.extract_subset(('COUNTRY', 'SEX', 'AGE', 'PHHWTA14', 'HHTYPE6'), 1,
                             'HHTYPE6')
+        self.run_sanity_checks()
         return self.populate_single_household()
 
     def build_age_distribution(self,
@@ -61,8 +74,8 @@ class UKSinglePersonHH(Synthesizer):
 
         control_sum = 0
 
-        for (sex_code, country_code) in it.product(('m', 'f'),
-                                                   ('e', 'w', 's', 'ni')):
+        for (sex_code, country_code) in tqdm(it.product(('m', 'f'),
+                                                        ('e', 'w', 's', 'ni'))):
             age_distribution = self.init_sampler(sex_code, country_code)
 
             sample_size = int(population_size.loc[sex_code, country_code])
@@ -73,7 +86,7 @@ class UKSinglePersonHH(Synthesizer):
                 'AGE': age_distribution.rvs(size=sample_size),
                 'SEX': sex_code,
                 'COUNTRY': country_code,
-                'HHID': self.generate_hh_id(sample_size)}))
+                'HH_ID': self.generate_hh_id(sample_size)}))
 
         result = pd.concat(df_collection, ignore_index=True)
 
