@@ -1,12 +1,12 @@
+import random
 import uuid
 from abc import ABC, abstractmethod
+from typing import Tuple, final
+
 import numpy as np
-import random
 import pandas as pd
 
 from mortality_module.synthesizer.constants import COUNTRY_MAP, SEX_MAP
-
-from typing import Tuple, List, final
 
 
 class Synthesizer(ABC):
@@ -85,7 +85,9 @@ class Synthesizer(ABC):
         else:
             hh_match = self._df[household_column_name] == hh_codes
 
-        self._data = self._df[hh_match][list(column_names)].reset_index(drop=True)
+        self._data = self._df[hh_match][list(column_names)]. \
+            reset_index(drop=True)
+
 
     @abstractmethod
     def augment_data(self):
@@ -95,6 +97,7 @@ class Synthesizer(ABC):
     def generate_new_population(self):
         pass
 
+    @final
     def data_preprocessing(self):
         self._df['COUNTRY'] = self._df['COUNTRY'] \
             .replace(4, 3) \
@@ -105,7 +108,6 @@ class Synthesizer(ABC):
             .astype(int) \
             .replace(SEX_MAP)
         self._df['AGE'] = self._df['AGE'].astype(int)
-
 
     def generate_hh_id(self, ss: int) -> list[uuid.UUID, ...]:
         """Generates unique household ids.
@@ -125,3 +127,7 @@ class Synthesizer(ABC):
     @final
     def cancel_changes(self):
         self._data = None
+
+    @staticmethod
+    def _validate_household_size(dataset):
+        pass
