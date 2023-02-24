@@ -6,9 +6,13 @@ class Sanitizer:
     @classmethod
     def household_size(cls, dataset: pd.DataFrame, id_column_name: str,
                        expected_size: int):
-        t = dataset[id_column_name]
-        return [id_ for id_ in np.unique(t) if
-                t[t == id_].size != expected_size]
+        if id_column_name in dataset.columns:
+            t = dataset[id_column_name]
+            return [id_ for id_ in np.unique(t) if
+                    t[t == id_].size != expected_size]
+        else:
+            print(f"No {id_column_name} column found, check your data.")
+            return []
 
     @classmethod
     def age(cls, data, age_min, age_max):

@@ -6,7 +6,7 @@ from typing import Tuple, final
 import numpy as np
 import pandas as pd
 
-from mortality_module.synthesizer.constants import COUNTRY_MAP, SEX_MAP
+from mortality_module.synthesizer.constants import UK_COUNTRY_MAP, UK_SEX_MAP
 
 
 class Synthesizer(ABC):
@@ -48,11 +48,15 @@ class Synthesizer(ABC):
         self._raw_data = pd.read_spss(file_name, convert_categoricals=False)
         self._df = self._raw_data.copy(deep=True)
 
-    @abstractmethod
-    def run_sanity_checks(self):
-        # run sanitizer
-        # FIXME add control sums everywhere!!!
-        pass
+    def run_sanity_checks(self) -> None:
+        assert set(self._data['COUNTRY']).issubset(UK_COUNTRY_MAP.values())
+
+        assert set(self._data['SEX']).issubset(UK_SEX_MAP.values())
+
+        assert self._data['AGE'].min() >= 0
+        assert self._data['AGE'].max() <= 100
+
+        assert self._data['PHHWT14'].min() > 0
 
     @final
     def extract_subset(self,
@@ -103,10 +107,10 @@ class Synthesizer(ABC):
             .replace(4, 3) \
             .replace(5, 4) \
             .astype(int) \
-            .replace(COUNTRY_MAP)
+            .replace(UK_COUNTRY_MAP)
         self._df['SEX'] = self._df['SEX'] \
             .astype(int) \
-            .replace(SEX_MAP)
+            .replace(UK_SEX_MAP)
         self._df['AGE'] = self._df['AGE'].astype(int)
 
     def generate_hh_id(self, ss: int) -> list[uuid.UUID, ...]:

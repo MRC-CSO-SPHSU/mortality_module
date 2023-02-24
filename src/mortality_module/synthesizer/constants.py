@@ -1,12 +1,12 @@
-SEX_MAP = {1: 'm',
-           2: 'f'}
+UK_SEX_MAP = {1: 'm',
+              2: 'f'}
 
-COUNTRY_MAP = {1: 'e',
-               2: 'ni',
-               3: 's',
-               4: 'w'}
+UK_COUNTRY_MAP = {1: 'e',
+                  2: 'ni',
+                  3: 's',
+                  4: 'w'}
 
-HH_CODES = {
+UK_HH_CODES = {
 1: "1 person",
 2: "2 or more persons, all different family units",
 3: "Married couple, no children, no other family units",

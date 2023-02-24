@@ -14,12 +14,20 @@ class UKCouplesHH(Synthesizer):
     def __init__(self, seed: int = 13371):
         super().__init__(seed)
 
-    def run_sanity_checks(self):
+    def run_sanity_checks(self) -> None:
+        super().run_sanity_checks()
+
         bad_ids = self._validate_household_size(self._data)
         if len(bad_ids) > 0:
             print("""Households with inconsistent number of people have been 
                      found, filtering them out.""")
             self._data = self._data[~self._data['HSERIALP'].isin(bad_ids)]
+
+        t = self._data.groupby('HSERIALP')['SEX'].value_counts().unstack()
+        same_sex = t.loc[(t['f'] == 2) | (t['m'] == 2)].index
+        if len(same_sex) > 0:
+            self._data.drop(index=same_sex, inplace=True)
+
 
     def augment_data(self) -> None:
         self._data = pd.pivot_table(self._data,
@@ -36,7 +44,7 @@ class UKCouplesHH(Synthesizer):
         self._data['HH_W'] = self._data['PHHWT14_m']
         self._data.drop(columns='PHHWT14_m', inplace=True)
         self._data.rename(columns={"AGE_f": "f", "AGE_m": "m", "HH_W": "w"},
-                   inplace=True)
+                          inplace=True)
 
     def generate_new_population(self) -> pd.DataFrame:
         self.data_preprocessing()

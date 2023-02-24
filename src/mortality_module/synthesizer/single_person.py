@@ -7,6 +7,7 @@ from scipy import stats
 from tqdm import tqdm
 
 from mortality_module.synthesizer.abstract.base_synthesizer import Synthesizer
+from mortality_module.synthesizer.sanitizer import Sanitizer
 from mortality_module.synthesizer.utils import data_range
 
 
@@ -18,6 +19,7 @@ class UKSinglePersonHH(Synthesizer):
         super().__init__(seed)
 
     def run_sanity_checks(self):
+        super().run_sanity_checks()
         bad_ids = self._validate_household_size(self._data)
         if len(bad_ids) > 0:
             print("""Households with inconsistent number of people have been
@@ -26,10 +28,7 @@ class UKSinglePersonHH(Synthesizer):
     @staticmethod
     def _validate_household_size(dataset):
         """Ensures that every household is composed of one person only."""
-        # return Sanitizer.household_size(dataset, 'HSERIALP', 1)
-        return []
-
-    # todo add soft check, there is no such column in APS, LFS only
+        return Sanitizer.household_size(dataset, 'HSERIALP', 1)
 
     def augment_data(self):
         raise NotImplementedError("No augmentation is needed.")
