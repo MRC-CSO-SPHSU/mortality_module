@@ -18,7 +18,6 @@ class Synthesizer(ABC):
         # ensure the same data generated every time we run this from scratch
 
         self._raw_data = None
-        self._df = None
         self._data = None
 
     @final
@@ -46,7 +45,7 @@ class Synthesizer(ABC):
             The name of a file.
         """
         self._raw_data = pd.read_spss(file_name, convert_categoricals=False)
-        self._df = self._raw_data.copy(deep=True)
+        self._data = self._raw_data.copy(deep=True)
 
     def run_sanity_checks(self) -> None:
         assert set(self._data['COUNTRY']).issubset(UK_COUNTRY_MAP.values())
@@ -83,18 +82,17 @@ class Synthesizer(ABC):
             weights.
         """
         if isinstance(hh_codes, tuple):
-            hh_match = self._df[household_column_name] == hh_codes[0]
+            hh_match = self._data[household_column_name] == hh_codes[0]
             for val in hh_codes[1:]:
-                hh_match = hh_match | (self._df[household_column_name] == val)
+                hh_match = hh_match | (self._data[household_column_name] == val)
         else:
-            hh_match = self._df[household_column_name] == hh_codes
+            hh_match = self._data[household_column_name] == hh_codes
 
-        self._data = self._df[hh_match][list(column_names)]. \
+        self._data = self._data[hh_match][list(column_names)]. \
             reset_index(drop=True)
 
-
     @abstractmethod
-    def augment_data(self):
+    def augment_data(self, *args, **kwargs):
         pass
 
     @abstractmethod
@@ -103,19 +101,19 @@ class Synthesizer(ABC):
 
     @final
     def data_preprocessing(self):
-        self._df['COUNTRY'] = self._df['COUNTRY'] \
+        self._data['COUNTRY'] = self._data['COUNTRY'] \
             .replace(4, 3) \
             .replace(5, 4) \
             .astype(int) \
             .replace(UK_COUNTRY_MAP)
-        self._df['SEX'] = self._df['SEX'] \
+        self._data['SEX'] = self._data['SEX'] \
             .astype(int) \
             .replace(UK_SEX_MAP)
-        self._df['AGE'] = self._df['AGE'].astype(int)
+        self._data['AGE'] = self._data['AGE'].astype(int)
+        self._data['HSERIALP'] = self._data['HSERIALP'].astype(int)
 
     def generate_hh_id(self, ss: int) -> list[uuid.UUID, ...]:
         """Generates unique household ids.
-
 
         Parameters
         ----------
