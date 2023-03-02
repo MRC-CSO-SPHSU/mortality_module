@@ -66,6 +66,8 @@ class Synthesizer(ABC):
         self._data = self._data[self._data[n] > 0]
         assert self._data[n].min() > 0
 
+        assert not self._data.isnull().values.any()
+
 
     @final
     def extract_subset(self,
