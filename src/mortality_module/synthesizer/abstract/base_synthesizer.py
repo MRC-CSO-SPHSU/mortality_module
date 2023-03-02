@@ -46,16 +46,22 @@ class Synthesizer(ABC):
         """
         self._raw_data = pd.read_spss(file_name, convert_categoricals=False)
         self._data = self._raw_data.copy(deep=True)
+        self._data.columns = self._data.columns.str.lower()
+
 
     def run_sanity_checks(self) -> None:
-        assert set(self._data['COUNTRY']).issubset(UK_COUNTRY_MAP.values())
+        """Runs basic data checks.
 
-        assert set(self._data['SEX']).issubset(UK_SEX_MAP.values())
+        Makes sure that all countries, sex values, and age are in some
+        acceptable range. Also asserts that hh weights are strictly positive.
+        """
+        print("Checking country, sex, age, and weights.")
+        assert set(self._data['country']).issubset(UK_COUNTRY_MAP.values())
+        assert set(self._data['sex']).issubset(UK_SEX_MAP.values())
+        assert 0 <= self._data['age'].min() <= 100
 
-        assert self._data['AGE'].min() >= 0
-        assert self._data['AGE'].max() <= 100
-
-        assert self._data['PHHWT14'].min() > 0
+        self._data = self._data[self._data['phhwta14'] > 0]
+        assert self._data['phhwta14'].min() > 0
 
     @final
     def extract_subset(self,
@@ -64,7 +70,7 @@ class Synthesizer(ABC):
                        household_column_name: str) -> None:
         """Selects a subset of data.
 
-        Selects certain properties of a household, including its actual type:
+        Selects certain properties of a household, including its actual type.
 
         Parameters
         ----------
@@ -88,8 +94,8 @@ class Synthesizer(ABC):
         else:
             hh_match = self._data[household_column_name] == hh_codes
 
-        self._data = self._data[hh_match][list(column_names)]. \
-            reset_index(drop=True)
+        self._data = (self._data[hh_match][list(column_names)]
+                      .reset_index(drop=True))
 
     @abstractmethod
     def augment_data(self, *args, **kwargs):
@@ -101,16 +107,17 @@ class Synthesizer(ABC):
 
     @final
     def data_preprocessing(self):
-        self._data['COUNTRY'] = self._data['COUNTRY'] \
-            .replace(4, 3) \
-            .replace(5, 4) \
-            .astype(int) \
-            .replace(UK_COUNTRY_MAP)
-        self._data['SEX'] = self._data['SEX'] \
-            .astype(int) \
-            .replace(UK_SEX_MAP)
-        self._data['AGE'] = self._data['AGE'].astype(int)
-        self._data['HSERIALP'] = self._data['HSERIALP'].astype(int)
+        self._data['country'] = (self._data['country']
+                                 .replace(4, 3)
+                                 .replace(5, 4)
+                                 .astype(int)
+                                 .replace(UK_COUNTRY_MAP))
+        self._data['sex'] = (self._data['sex']
+                             .astype(int)
+                             .replace(UK_SEX_MAP))
+        self._data['age'] = self._data['age'].astype(int)
+        if 'hserialp' in self._data.columns:
+            self._data['hserialp'] = self._data['hserialp'].astype(int)
 
     def generate_hh_id(self, ss: int) -> list[uuid.UUID, ...]:
         """Generates unique household ids.

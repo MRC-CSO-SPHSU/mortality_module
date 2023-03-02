@@ -11,9 +11,6 @@ from mortality_module.synthesizer.sanitizer import Sanitizer
 from mortality_module.synthesizer.utils import data_range
 
 
-# all variables are lowercase
-# replace country with region?
-
 class UKSinglePersonHH(Synthesizer):
     def __init__(self, seed: int = 1337):
         super().__init__(seed)
@@ -28,26 +25,26 @@ class UKSinglePersonHH(Synthesizer):
     @staticmethod
     def _validate_household_size(dataset):
         """Ensures that every household is composed of one person only."""
-        return Sanitizer.household_size(dataset, 'HSERIALP', 1)
+        return Sanitizer.household_size(dataset, 'hserialp', 1)
 
     def augment_data(self):
         raise NotImplementedError("No augmentation is needed.")
 
     def generate_new_population(self) -> pd.DataFrame:
         self.data_preprocessing()
-        self.extract_subset(('COUNTRY', 'SEX', 'AGE', 'PHHWTA14', 'HHTYPE6'), 1,
-                            'HHTYPE6')
+        self.extract_subset(('country', 'sex', 'age', 'phhwta14', 'hhtype6'), 1,
+                            'hhtype6')
         self.run_sanity_checks()
         return self.populate_single_household()
 
     def build_age_distribution(self,
                                sex_: str,
                                country_: str) -> tuple[np.ndarray, np.ndarray]:
-        t = self._data[(self._data["SEX"] == sex_) &
-                       (self._data["COUNTRY"] == country_)]
+        t = self._data[(self._data["sex"] == sex_) &
+                       (self._data["country"] == country_)]
 
-        ages = t['AGE'].values
-        w = t['PHHWTA14'].values
+        ages = t['age'].values
+        w = t['phhwta14'].values
 
         num_bins, range_ = data_range(ages)
 
@@ -65,9 +62,9 @@ class UKSinglePersonHH(Synthesizer):
                                  values=(bin_edges[:-1], densities))
 
     def populate_single_household(self) -> pd.DataFrame:
-        population_size = self._data[['SEX', 'COUNTRY', 'PHHWTA14']]. \
-            groupby(['SEX', 'COUNTRY']). \
-            sum(['PHHWTA14'])
+        population_size = self._data[['sex', 'country', 'phhwta14']]. \
+            groupby(['sex', 'country']). \
+            sum(['phhwta14'])
 
         df_collection = []
 
@@ -82,20 +79,20 @@ class UKSinglePersonHH(Synthesizer):
             control_sum += sample_size
 
             df_collection.append(pd.DataFrame(data={
-                'AGE': age_distribution.rvs(size=sample_size),
-                'SEX': sex_code,
-                'COUNTRY': country_code,
-                'HH_ID': self.generate_hh_id(sample_size)}))
+                'age': age_distribution.rvs(size=sample_size),
+                'sex': sex_code,
+                'country': country_code,
+                'hh_id': self.generate_hh_id(sample_size)}))
 
         result = pd.concat(df_collection, ignore_index=True)
 
-        result['AGE'] = result['AGE'].astype(int)
-        result['SEX'] = result['SEX']
-        result['COUNTRY'] = result['COUNTRY']
+        result['age'] = result['age'].astype(int)
+        result['sex'] = result['sex']
+        result['country'] = result['country']
 
-        result['HH_TYPE'] = 1
+        result['hh_type'] = 1
 
-        assert int(control_sum) == result['AGE'].size, "Size mismatch"
+        assert int(control_sum) == result['age'].size, "Size mismatch"
 
         return result
 
