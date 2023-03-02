@@ -60,8 +60,10 @@ class Synthesizer(ABC):
         assert set(self._data['sex']).issubset(UK_SEX_MAP.values())
         assert 0 <= self._data['age'].min() <= 100
 
-        self._data = self._data[self._data['phhwta14'] > 0]
-        assert self._data['phhwta14'].min() > 0
+        n = 'phhwta14' if 'phhwta14' in self._data.columns else 'phhwt14'
+        self._data = self._data[self._data[n] > 0]
+        assert self._data[n].min() > 0
+
 
     @final
     def extract_subset(self,
