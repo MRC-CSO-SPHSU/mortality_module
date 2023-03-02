@@ -6,6 +6,7 @@ import pandas as pd
 from tqdm import tqdm
 
 from mortality_module.synthesizer.abstract.base_synthesizer import Synthesizer
+from mortality_module.synthesizer.constants import UK_NEW_HH_CODES
 from mortality_module.synthesizer.sanitizer import Sanitizer
 from mortality_module.synthesizer.utils import data_range
 
@@ -13,6 +14,7 @@ from mortality_module.synthesizer.utils import data_range
 class UKCouplesHH(Synthesizer):
     def __init__(self, seed: int = 13371):
         super().__init__(seed)
+        self._hh_class = 'c'
 
     def run_sanity_checks(self) -> None:
         super().run_sanity_checks()
@@ -50,7 +52,7 @@ class UKCouplesHH(Synthesizer):
         self.data_preprocessing()
         self.extract_subset(('country', 'sex', 'age', 'phhwt14', 'hserialp',
                              'hhtype6'),
-                            (3, 4),
+                            tuple(UK_NEW_HH_CODES[self._hh_class]),
                             'hhtype6')
         self.run_sanity_checks()
         self.augment_data()
@@ -95,18 +97,17 @@ class UKCouplesHH(Synthesizer):
             all_data.append(pd.DataFrame(data={'f': ages_f[index_[0]],
                                                'm': ages_m[index_[1]],
                                                'country': country_,
-                                               'hh_id': ids,
-                                               'hh_type': hh_type}))
+                                               'hh_id': ids}))
 
 
         result = pd.concat(all_data,
                            ignore_index=True).melt(
-            id_vars=['country', 'hh_id', 'hh_type'], value_vars=['f', 'm'],
+            id_vars=['country', 'hh_id'], value_vars=['f', 'm'],
             var_name='sex', value_name='age')
         result['age'] = result['age'].astype(int)
-        result['hh_type'] = result['hh_type'].astype(int)
 
-        return result.sort_values(by=['hh_id'])
+        result['hh_type'] = self._hh_class
+        return result
 
 if __name__ == "__main__":
     ukchh = UKCouplesHH()

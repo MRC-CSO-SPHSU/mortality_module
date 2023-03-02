@@ -7,6 +7,7 @@ from scipy import stats
 from tqdm import tqdm
 
 from mortality_module.synthesizer.abstract.base_synthesizer import Synthesizer
+from mortality_module.synthesizer.constants import UK_NEW_HH_CODES
 from mortality_module.synthesizer.sanitizer import Sanitizer
 from mortality_module.synthesizer.utils import data_range
 
@@ -14,6 +15,7 @@ from mortality_module.synthesizer.utils import data_range
 class UKSinglePersonHH(Synthesizer):
     def __init__(self, seed: int = 1337):
         super().__init__(seed)
+        self._hh_class = 'a'
 
     def run_sanity_checks(self):
         super().run_sanity_checks()
@@ -32,7 +34,8 @@ class UKSinglePersonHH(Synthesizer):
 
     def generate_new_population(self) -> pd.DataFrame:
         self.data_preprocessing()
-        self.extract_subset(('country', 'sex', 'age', 'phhwta14', 'hhtype6'), 1,
+        self.extract_subset(('country', 'sex', 'age', 'phhwta14', 'hhtype6'),
+                            tuple(UK_NEW_HH_CODES[self._hh_class]),
                             'hhtype6')
         self.run_sanity_checks()
         return self.populate_single_household()
@@ -62,9 +65,9 @@ class UKSinglePersonHH(Synthesizer):
                                  values=(bin_edges[:-1], densities))
 
     def populate_single_household(self) -> pd.DataFrame:
-        population_size = self._data[['sex', 'country', 'phhwta14']]. \
-            groupby(['sex', 'country']). \
-            sum(['phhwta14'])
+        population_size = (self._data[['sex', 'country', 'phhwta14']]
+                           .groupby(['sex', 'country'])
+                           .sum(['phhwta14']))
 
         df_collection = []
 
@@ -90,7 +93,7 @@ class UKSinglePersonHH(Synthesizer):
         result['sex'] = result['sex']
         result['country'] = result['country']
 
-        result['hh_type'] = 1
+        result['hh_type'] = self._hh_class
 
         assert int(control_sum) == result['age'].size, "Size mismatch"
 

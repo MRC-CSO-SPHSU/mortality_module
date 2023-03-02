@@ -20,6 +20,8 @@ class Synthesizer(ABC):
         self._raw_data = None
         self._data = None
 
+        self._hh_class = None
+
     @final
     def _update_rng_state(self):
         self._rng.seed(self._rng_seed)
@@ -68,7 +70,7 @@ class Synthesizer(ABC):
     @final
     def extract_subset(self,
                        column_names: Tuple[str, ...],
-                       hh_codes: int | Tuple[int, ...],
+                       hh_codes: Tuple[int, ...],
                        household_column_name: str) -> None:
         """Selects a subset of data.
 
@@ -78,9 +80,8 @@ class Synthesizer(ABC):
         ----------
         column_names : Tuple[str, ...]
             Names of the columns to be selected.
-        hh_codes : int | Tuple[int, ...]
-            A single integer or a collection of integers that encode households
-            of some types.
+        hh_codes : Tuple[int, ...]
+            A collection of integers that encode households of some types.
         household_column_name : str
             The column that contains household ids.
 
@@ -89,12 +90,10 @@ class Synthesizer(ABC):
             different households with the same parameters might have different
             weights.
         """
-        if isinstance(hh_codes, tuple):
-            hh_match = self._data[household_column_name] == hh_codes[0]
-            for val in hh_codes[1:]:
-                hh_match = hh_match | (self._data[household_column_name] == val)
-        else:
-            hh_match = self._data[household_column_name] == hh_codes
+
+        hh_match = self._data[household_column_name] == hh_codes[0]
+        for val in hh_codes[1:]:
+            hh_match = hh_match | (self._data[household_column_name] == val)
 
         self._data = (self._data[hh_match][list(column_names)]
                       .reset_index(drop=True))
