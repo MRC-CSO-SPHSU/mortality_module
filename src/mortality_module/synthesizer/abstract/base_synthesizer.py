@@ -50,7 +50,6 @@ class Synthesizer(ABC):
         self._data = self._raw_data.copy(deep=True)
         self._data.columns = self._data.columns.str.lower()
 
-
     def run_sanity_checks(self) -> None:
         """Runs basic data checks.
 
@@ -67,7 +66,6 @@ class Synthesizer(ABC):
         assert self._data[n].min() > 0
 
         assert not self._data.isnull().values.any()
-
 
     @final
     def extract_subset(self,
@@ -93,12 +91,9 @@ class Synthesizer(ABC):
             weights.
         """
 
-        hh_match = self._data[household_column_name] == hh_codes[0]
-        for val in hh_codes[1:]:
-            hh_match = hh_match | (self._data[household_column_name] == val)
-
-        self._data = (self._data[hh_match][list(column_names)]
-                      .reset_index(drop=True))
+        self._data = (
+            self._data[self._data[household_column_name].isin(hh_codes)][
+                list(column_names)].reset_index(drop=True))
 
     @abstractmethod
     def augment_data(self, *args, **kwargs):
