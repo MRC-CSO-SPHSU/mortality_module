@@ -47,3 +47,16 @@ UK_NEW_HH_CODES = {
     'i': [21, 22, 23],
     'j': [24]
 }
+
+RELFHU_VALUES = {
+    1: 'Head of family',
+    2: 'Wife/partner of head of family',
+    3: 'Child of head of family/other person'
+}
+
+CAIND_VALUES = {
+    1: 'Adult',
+    2: 'Child of head of household and head of family unit',
+    3: 'Child of other family',
+    4: 'Child of head of household but not head of family unit'
+}
