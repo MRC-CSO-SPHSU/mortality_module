@@ -1,9 +1,9 @@
-import os
+from pathlib import Path
 from typing import Final, List, Annotated, Dict
 
 import pandas as pd
 
-# TODO cross-platform paths
+from mortality_module.utils.utils import path_validation
 
 USOC_FIELDS: Final[Annotated[List[str], 61]] = [
     'hidp', 'pidp', 'ppid', 'fnspid', 'mnspid', 'gor_dv', 'indinus_xw',
@@ -35,7 +35,7 @@ USOC_FIELDS_SPLIT: Final[Annotated[Dict[str, List[str]], 6]] = {
     'income': ['hidp', 'pidp', 'ficode']}
 
 
-def _read_usoc_fields(path_: str = None,
+def _read_usoc_fields(path_: str | Path = None,
                       verbose: bool = True) -> dict[pd.DataFrame] | None:
     """ Reads all data from provided .csv files and keeps only what's needed.
 
@@ -59,41 +59,38 @@ def _read_usoc_fields(path_: str = None,
     Returns
     -------
     dict[pd.DataFrame] or None
-        A dictionary with corresponding dataframes or `None` if `path_` is
-         `None`.
+        A dictionary with corresponding dataframes.
 
     """
-    if path_ is None:
-        print('No valid path provided.')
-    else:
-        data = {}
-        for filename_ in os.listdir(path_):
-            if filename_.endswith('.csv'):
-                df = pd.read_csv(path_ + filename_, low_memory=False)
-                final_columns = [column_ for column_ in
-                                 USOC_FIELDS if column_ in df.columns]
-                data[filename_.split('.')[0].split('/')[-1]] = df[final_columns]
+    p_ = path_validation(path_)
 
+    data = {}
+    for filename_ in [x for x in p_.iterdir()]:
+        if filename_.suffix == '.csv':
+            df = pd.read_csv(path_ / filename_, low_memory=False)
+            final_columns = [column_ for column_ in
+                             USOC_FIELDS if column_ in df.columns]
+            data[filename_.stem] = df[final_columns]
+
+    for k, v in data.items():
+        if k != 'indall':
+            data[k] = v.drop(columns='gor_dv', errors='ignore')
+
+    if verbose:
         for k, v in data.items():
-            if k != 'indall':
-                data[k] = v.drop(columns='gor_dv', errors='ignore')
-                # drop gor_dv as redundant
+            print(k)
+            print('\t', [column_ for column_ in
+                         USOC_FIELDS if column_ in v.columns])
 
-        if verbose:
-            for k, v in data.items():
-                print(k)
-                print('\t', [column_ for column_ in
-                             USOC_FIELDS if column_ in v.columns])
-
-        return data
+    return data
 
 
-def convert_stata_csv(path_: str = None, prefix_: str = 'a_') -> None:
+def convert_stata_csv(path_: str | Path = None, prefix_: str = 'a_') -> None:
     """ Converts binary .dta STATA files to regular .csv files.
 
     This is a helper function to convert Understanding Society .dta records - as
     the most complete ones - to regular .csv files. The method is designed to
-    work with one wave only.
+    work with one wave only. All output data is stored in the same directory.
 
     Parameters
     ----------
@@ -102,15 +99,13 @@ def convert_stata_csv(path_: str = None, prefix_: str = 'a_') -> None:
         prefix_ : str
             The wave prefix.
     """
-    if path_ is None:
-        print('No valid path specified.')
-    elif not isinstance(path_, str):
-        print('Provided path is not a string.')
-    else:
-        file_names = os.listdir(path_)
-        for filename_ in file_names:
-            df = pd.read_stata(path_ + filename_)
-            df.columns = df.columns.str.lower().str.removeprefix(prefix_)
-            df.to_csv(filename_.
-                      removesuffix('.dta').
-                      removeprefix(prefix_) + '.csv', index=False)
+    p_ = path_validation(path_)
+
+    for filename_ in [x for x in p_.iterdir()]:
+        df = pd.read_stata(path_ / filename_)
+        df.columns = df.columns.str.lower().str.removeprefix(prefix_)
+        df.to_csv(path_ / Path(filename_.
+                               name.
+                               removesuffix('.dta').
+                               removeprefix(prefix_).
+                               join(['.csv']), index=False))
