@@ -5,25 +5,29 @@ import pandas as pd
 
 # TODO cross-platform paths
 
-USOC_FIELDS: Final[Annotated[List[str], 46]] = [
+USOC_FIELDS: Final[Annotated[List[str], 61]] = [
     'hidp', 'pidp', 'ppid', 'fnspid', 'mnspid', 'gor_dv', 'indinus_xw',
-    'hhdenus_xw', 'pns1pid', 'pns2pid', 'depchl_dv', 'scsf1', 'mastat_dv',
-    'jbstat', 'hiqual_dv', 'maedqf', 'paedqf', 'dep', 'dnc', 'fimnpen_dv',
-    'fimnmisc_dv', 'fiyrinvinc_dv', 'ficode', 'ded', 'drtren', 'sedcsmpl',
-    'istrtdaty', 'hsownd', 'sex', 'age', 'scghqa', 'scghqb', 'scghqc', 'scghqd',
-    'scghqe', 'scghqf', 'scghqg', 'scghqh', 'scghqi', 'scghqj', 'scghqk',
-    'scghql', 'fimnsben_dv', 'paygu_dv', 'seearngrs_dv', 'j2pay_dv']
+    'hhdenus_xw', 'pns1pid', 'pns2pid', 'depchl_dv', 'mastat_dv', 'jbstat',
+    'hiqual_dv', 'maedqf', 'paedqf', 'dep', 'dnc', 'fimnpen_dv', 'fimnmisc_dv',
+    'fiyrinvinc_dv', 'ficode', 'ded', 'drtren', 'sedcsmpl', 'istrtdaty',
+    'hsownd', 'sex', 'age', 'scghqa', 'scghqb', 'scghqc', 'scghqd', 'scghqe',
+    'scghqf', 'scghqg', 'scghqh', 'scghqi', 'scghqj', 'scghqk', 'scghql',
+    'fimnsben_dv', 'paygu_dv', 'seearngrs_dv', 'j2pay_dv', 'sf1', 'sf2a',
+    'sf2b', 'sf3a', 'sf3b', 'sf4a', 'sf4b', 'sf5', 'sf6a', 'sf6b', 'sf6c',
+    'sf7', 'scflag_dv', 'jbft_dv', 'sclfsato', 'finnow']
 
 USOC_FIELDS_SPLIT: Final[Annotated[Dict[str, List[str]], 6]] = {
     'indall': ['hidp', 'pidp', 'ppid', 'fnspid', 'mnspid', 'gor_dv', 'pns1pid',
-               'pns2pid', 'depchl_dv', 'mastat_dv', 'sex'],
+               'pns2pid', 'depchl_dv', 'mastat_dv', 'sex', 'scflag_dv'],
     'indresp': ['hidp', 'pidp', 'ppid', 'fnspid', 'mnspid', 'indinus_xw',
                 'pns1pid', 'pns2pid', 'depchl_dv', 'mastat_dv', 'jbstat',
                 'hiqual_dv', 'maedqf', 'paedqf', 'fimnpen_dv', 'fimnmisc_dv',
                 'fiyrinvinc_dv', 'istrtdaty', 'sex', 'scghqa', 'scghqb',
                 'scghqc', 'scghqd', 'scghqe', 'scghqf', 'scghqg', 'scghqh',
                 'scghqi', 'scghqj', 'scghqk', 'scghql', 'fimnsben_dv',
-                'paygu_dv', 'seearngrs_dv', 'j2pay_dv'],
+                'paygu_dv', 'seearngrs_dv', 'j2pay_dv', 'sf1', 'sf2a', 'sf2b',
+                'sf3a', 'sf3b', 'sf4a', 'sf4b', 'sf5', 'sf6a', 'sf6b', 'sf6c',
+                'sf7', 'scflag_dv', 'jbft_dv', 'sclfsato', 'finnow'],
     'hhresp': ['hidp', 'hhdenus_xw', 'hsownd'],
     'youth': ['hidp', 'pidp', 'fnspid', 'mnspid', 'pns1pid', 'pns2pid', 'sex'],
     'child': ['hidp', 'pidp', 'fnspid', 'mnspid', 'pns1pid', 'pns2pid',

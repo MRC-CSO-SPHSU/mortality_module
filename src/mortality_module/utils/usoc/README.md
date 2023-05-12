@@ -90,18 +90,25 @@ weights; they are marked with the `_lw` suffix. For the same reason we also drop
 
 Next step is to:
  - drop `scghq2_dv`
- - replace `age_dv` with `age`, `sex_dv` with `sex`, `scghq1_dv` with
-`scghqa` to `scghql`, `fihhmnsben_dv` with `fimnsben_dv`, `fimnlabgrs_dv` with 
-`paygu_dv`, `seearngrs_dv`, and `j2pay_dv`
+ - replace `age_dv` with `age`; `sex_dv` with `sex`; `scghq1_dv` with
+`scghqa` to `scghql` to derive full GHQ score later; `fihhmnsben_dv` with 
+`fimnsben_dv`; `fimnlabgrs_dv` with `paygu_dv`, `seearngrs_dv`, and `j2pay_dv`;
+`scsf1` with `sf1` to take into account Wave 1 only
+ - add `sf2a`, `sf2b`, `sf3a`, `sf3b`, `sf4a`, `sf4b`, `sf5`, `sf6a`, `sf6b`,
+`sf6c`, `sf7`, and `scflag_dv` to score version 2 of the SF-12® Health Survey;
+`jbft_dv` (full time employee marker); life satisfaction `sclfsato` indicator;
+financial distress indicator `finnow`
 
-The resulting list contains 46 variables per individual:
+The resulting list contains 61 fields per individual:
 `hidp`, `pidp`, `ppid`, `fnspid`, `mnspid`, `gor_dv`, `indinus_xw`,
-`hhdenus_xw`, `pns1pid`, `pns2pid`, `depchl_dv`, `scsf1`, `mastat_dv`, `jbstat`,
+`hhdenus_xw`, `pns1pid`, `pns2pid`, `depchl_dv`, `mastat_dv`, `jbstat`,
 `hiqual_dv`, `maedqf`, `paedqf`, `dep`, `dnc`, `fimnpen_dv`, `fimnmisc_dv`,
 `fiyrinvinc_dv`, `ficode`, `ded`, `drtren`, `sedcsmpl`, `istrtdaty`, `hsownd`,
 `sex`, `age`, `scghqa`, `scghqb`, `scghqc`, `scghqd`, `scghqe`, `scghqf`,
 `scghqg`, `scghqh`, `scghqi`, `scghqj`, `scghqk`, `scghql`, `fimnsben_dv`,
-`paygu_dv`, `seearngrs_dv`, `j2pay_dv`
+`paygu_dv`, `seearngrs_dv`, `j2pay_dv`, `sf1`, `sf2a`, `sf2b`, `sf3a`, `sf3b`,
+`sf4a`, `sf4b`, `sf5`, `sf6a`, `sf6b`, `sf6c`, `sf7`, `scflag_dv`, `jbft_dv`,
+`sclfsato`, `finnow`
 
 
 ### Definitions
