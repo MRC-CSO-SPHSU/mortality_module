@@ -1,14 +1,17 @@
 # Understanding Society
+
 ## Reasons
-We've gradually switched over to 
+
+We've gradually switched over to
 [Understanding Society](https://www.understandingsociety.ac.uk/) as the
 foundation for synthetic populations. It provides a researcher with more
-attributes per household at the cost of smaller sample sizes. 
+attributes per household at the cost of smaller sample sizes.
 
 Other datasets such as Census 2011 etc. are still used for data validation as
-well as to impose external constraints. 
+well as to impose external constraints.
 
 ## Extracted raw fields
+
 We extract (and augment) the following columns for further processing:
 
 | **EuroMod name** | **USoc name**                                                                                 | **Description**                                                                                                                                                           | **Notes**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
@@ -33,19 +36,16 @@ We extract (and augment) the following columns for further processing:
 | dhm              | `scghq1_dv`                                                                                   | DEMOGRAPHIC : Subjective wellbeing (GHQ): Likert<br>Scale from 0 to 36, assumed to be continuous in the simulation.                                                       | This measure converts valid answers to 12 questions of the General Health Questionnaire (GHQ) to a single scale by recoding so that the scale for individual variables runs from 0 to 3 instead of 1 to 4, and then summing, giving a scale running from 0 (the least distressed) to 36 (the most distressed). Values for children (missing in the UKHLS) are imputed using a regression model.                                                                                                                                             |
 | dhm_ghq          | `scghq2_dv`                                                                                   | DEMOGRAPHIC : Subjective wellbeing (GHQ): Caseness<br>0: not psychologically distressed, scghq2_dv < 4<br>1: psychologically distressed, scghq2_dv >= 4                   | This measure converts valid answers to 12 questions of the General Health Questionnaire (GHQ) to a single scale by recoding 1 and 2 values on individual variables to 0, and 3 and 4 values to 1, and then summing, giving a scale running from 0 (the least distressed) to 12 (the most distressed). A binary indicator is then created, equal to 1 for values >= 4.                                                                                                                                                                       |
 | dcpst            | `mastat_dv`                                                                                   | DEMOGRAPHIC : Partnership status<br>1: Partnered<br>2: Single and never married<br>3: Previously partnered                                                                | Partnership status from `mastat_dv` variable. 1 (Partnered) are those in marriages or cohabiting relationships, 2 (Single) are those who have never been married, 3 (Previously partnered) Individuals who have been in a formal relationship, i.e. married or civil partnership.                                                                                                                                                                                                                                                           |
-| ded              | `jbstat`                                                                                      | DEMOGRAPHIC : In Continuous Education<br>0: No<br>1: Yes                                                                                                                  | In education from `jbstat` variable, where `jbstat` = 7 then in education. If missing then used previous or next wave's labour force status and dates left education to fill in. If have returned to education following a break then `ded` = 0.                                                                                                                                                                                                                                                                                            |
 | deh_c3           | `hiqual_dv`                                                                                   | DEMOGRAPHIC : Education - Highest Status<br>1: High<br>2: Medium<br>3: Low                                                                                                | Education from `hiqual_dv` variable. 1 (High) education means degree, 2 (Medium) education means Other higher degree, A-levels etc., GCSE etc., 3 (Low) means Other qualification, no qualification.                                                                                                                                                                                                                                                                                                                                        |
 | der              | `jbstat`                                                                                      | DEMOGRAPHIC : Return to Education<br>0: No<br>1: Yes                                                                                                                      | In education after having taken a break from `jbstat` variable, where `jbstat` = 7 and previous wave's jbstat ne 7 then returned to education.<br/>If missing then used previous or next wave's labour force status and dates left education to fill in.                                                                                                                                                                                                                                                                                    |
 | dehsp_c3         | `hiqual_dv`                                                                                   | DEMOGRAPHIC : Education - Spouse's Highest Status<br>1: High<br>2: Medium<br>3: Low                                                                                       | Spouse's education from `hiqual_dv` variable. 1 (High) education means degree, 2 (Medium) education means Other higher degree, A-levels etc., GCSE etc., 3 (Low) means Other qualification, no qualification.                                                                                                                                                                                                                                                                                                                               |
 | dehm_c3          | `maedqf`                                                                                      | DEMOGRAPHIC : Education - Mother's Highest Status<br>1: High<br>2: Medium<br>3: Low                                                                                       | Mother's education from `maedqf` in xwavedat file. If missing and individual lives with parents, their current level of education is used to fill in missing values.<br/>Levels set to match deh variable, 1 (High) is "she gained a university degree or higher degree", 2 (Medium) is "she gained post school quals or certs (e.g. city & guilds)" or "she left school with some qualifications or certificates" and 3 (Low) is "she left school with no qualifications or certificates" or "she did not go to school at all" or "other". |
 | dehf_c3          | `paedqf`                                                                                      | DEMOGRAPHIC : Education - Father's Highest Status<br>1: High<br>2: Medium<br>3: Low                                                                                       | Father's education form `paedqf` in xwavedat file. Same rules as for `dehm` above.                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | dcpen            | `mastat_dv`                                                                                   | DEMOGRAPHIC : Enter partnership<br>0: No<br>1: Yes                                                                                                                        | Generated from `mastat_dv` variable, 1 means that individual has entered a partnership (2/3/10=married/civil partnership/cohabiting), when their previous wave's mastat_dv was 1=single or 4-9=previously partnered.<br/>In cases where `mastat_dv` was the same but `ppid` at t-1 was not equal to `ppid` at t then set to 1.                                                                                                                                                                                                              |
-| dcpyy            | `dep`                                                                                         | DEMOGRAPHIC : Years in partnership                                                                                                                                        | Generated from `dep` variable for each year in the same partnership this variable increases by one.                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | dcpex            | `mastat_dv`                                                                                   | DEMOGRAPHIC : Exited partnership<br>0: No<br>1: Yes                                                                                                                       | Generated from `mastat_dv` variable, 1 means that individual has exited a partnership (`mastat_dv` = 1,4,5,7,8), when they were in a relationship in the previous wave (mastat_dv=2/3/10). Excluded those who exited a partnership due to widowhood.<br/>In cases where `mastat_dv` was the same but `ppid` at t-1 was not equal to `ppid` at t then set to 1.                                                                                                                                                                              |
 | dcpagdf          | `age_dv`                                                                                      | DEMOGRAPHIC : Difference between ages of partners in a union                                                                                                              | Generated from `age_dv` variable, subtracting spouse's age from own.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | dlltsd           | `jbstat`                                                                                      | DEMOGRAPHIC : Long-term sick or disabled<br>0: No<br>1: Yes                                                                                                               | Long-term sick or disabled from `jbstat` variable, where `jbstat` = 8 then long-term sick or disabled. If missing then used previous or next wave's labour force status.                                                                                                                                                                                                                                                                                                                                                                    |
 | dlrtrd           | `jbstat`                                                                                      | DEMOGRAPHIC : Retired<br>0: No<br>1: Yes                                                                                                                                  | Retired from `jbstat` variable, where `jbstat` = 4 then retired. If missing then used previous or next wave's labour force status.                                                                                                                                                                                                                                                                                                                                                                                                          |
-| dhhtp            | `mastat_dv`; `dnc`                                                                            | DEMOGRAPHIC : Household Composition<br>1: Couple with No Children<br>2: Couple with Children<br>3: Single with No Children<br>4: Single with Children                     | Household composition derived from partnership status and number of children in household variables.                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | drtren           | `jbstat`                                                                                      | DEMOGRAPHIC : Enter retirement<br>0: No<br>1: Yes                                                                                                                         | Generated from `jbstat` variable, 1 means that individual has entered retirement (4), when their previous wave's `jbstat` was not equal to 4 (either student, not in work or employed).                                                                                                                                                                                                                                                                                                                                                     |
 | dlftphm          | `fnspid`; `mnspid`                                                                            | DEMOGRAPHIC : Exited Parental Home<br>0: No<br>1: Yes                                                                                                                     | Generated from `fnspid` and/or `mnspid`. 1 means that individual no longer lives with a parent (`fnspid` & `mnspid` is equal to missing) when in the previous wave they lived with a parent (`fnspid` or `mnspid` not equal to missing).                                                                                                                                                                                                                                                                                                    |
 | les_c4           | `jbstat`                                                                                      | LABOUR MARKET : Activity status<br>1 Employed or self-employed<br>2 Student<br>3 Not employed<br>4 Retired                                                                | Activity status from `jbstat` variable. 1 is employed/self-employed, 2 is full-time student, 3 is not employed, 4 is retired                                                                                                                                                                                                                                                                                                                                                                                                                |
@@ -56,12 +56,9 @@ We extract (and augment) the following columns for further processing:
 | yptciihs_dv      | `fimnpen_dv`; `fimnmisc_dv`; `fiyrinvinc_dv`; `ficode` = 1, 25, 26, 28 and 29                 | INCOME : Gross personal non-employment, non-benefit income<br>                                                                                                            | Gross personal non-employment, non-benefit income combination of pension, miscellaneous (see comment for definition), Savings and Investment Income, Trade Union / Friendly Society Payment and maintenace or alimony. Adjusted for inflation. Normalised using inverse hyperbolic sine.                                                                                                                                                                                                                                                    |
 | yplgrs_dv        | `fimnlabgrs_dv`                                                                               | INCOME : Gross personal employment income                                                                                                                                 | Gross personal employment income is labour income only. Adjusted for and inflation. Normalised using inverse hyperbolic sine.                                                                                                                                                                                                                                                                                                                                                                                                               |
 | ynbcpdf_dv       | `fimnlabgrs_dv`; `fimnpen_dv`; `fimnmisc_dv`; `fiyrinvinc_dv`; `ficode` = 1, 25, 26,28 and 29 | INCOME : Difference between own and spouse's gross personal non-benefit income                                                                                            | Difference between own and spouse's gross non-benefit income using `ypnbihs_dv` and `ypnbihs_dv_sp`.                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| sedex            | `jbstat`                                                                                      | SYSTEM : Year left education<br>0: No<br>1: Yes                                                                                                                           | Generated from `jbstat` variable. If current `jbstat` != 7 and previous wave's `jbstat` = 7. Rules from `ded` apply.                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| sedex            | `jbstat`                                                                                      | SYSTEM : Year left education<br>0: No<br>1: Yes                                                                                                                           | Generated from `jbstat` variable. If current `jbstat` != 7 and previous wave's `jbstat` = 7.                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | ssscp            | `mastat_dv`; `sex_dv`                                                                         | SYSTEM : In a same-sex partnership<br>0: No<br>1: Yes                                                                                                                     | Generated from `mastat_dv` and `sex_dv`, 1 if in a partnership (2,3,10) and `sex_dv` and spouse's `sex_dv` are the same.                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | sprfm            | `age_dv`; `sex_dv`                                                                            | SYSTEM : Women age 18-44 (Fertility Range)<br>1: Yes                                                                                                                      | Generated from `age_dv` and `sex_dv`, 1 if a women between the ages of 18 and 44.                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| sedcsmpl         | `age_dv`; `ded`                                                                               | SYSTEM : Continuous education sample<br>0: Aged 16+ and not in continuous education<br>1: Aged 16-29 and in continuous education                                          | Generated from `age_dv` and `ded` variables. 1 includes first instance of not being in education.                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| sedrsmpl         | `age_dv`; `drtren`                                                                            | SYSTEM : Return to education sample<br>1: Aged 16-29 not in continous education or aged 30-45                                                                             | Generated from `age_dv` and `drtren` variables.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| scedsmpl         | `sedcsmpl`; `ded`                                                                             | SYSTEM : In Continuous education sample<br>0: Aged 16+ and not in continuous education<br>1: Aged 16-29 and in continuous education                                       | Generated from `sedcsmpl` and `ded` variables.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | stm              | `istrtdaty`                                                                                   | 0: Aged 16+ and not in continuous education<br/>1: Aged 16-29 and in continuous education                                                                                 | Generated from `istrtdaty` variable, year of interview.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | dhh_owned        | `hsownd`                                                                                      | Home ownership dummy<br>0 = renter<br>1 = owner (`w`_hsownd == 1 or `w`_hsownd == 2 or `w`_hsownd == 3)                                                                   | Dhh_owned is the definition used in the initial population and in the model predicting house ownership in the homeownership process of the simulation.                                                                                                                                                                                                                                                                                                                                                                                      |
 | econ_benefits    | `fihhmnsben_dv`                                                                               | Benfit income dummy<br>0 No (`fihhmnsben_dv`=0)<br>1 yes (`fihhmnsben_dv` > 0)                                                                                            | This definition refers to the definition used by prediction models.<br/>In the simulation, benefit recipiency is based on the donor benefit unit matched with the simulated benefit unit.<br/>If it receives monetary or non-monetary benefits, "receivesBenefitsFlag" is set to 1.                                                                                                                                                                                                                                                         |
@@ -71,94 +68,53 @@ The effective list of variables is as follows:
 `indinub_xw`, `indinus_lw`, `indinub_lw`, `indscus_lw`, `indscub_lw`,
 `hhdenus_xw`, `hhdenub_xw`, `age_dv`, `pns1pid`, `pns2pid`, `depchl_dv`,
 `sex_dv`, `scsf1`, `scghq1_dv`, `scghq2_dv`, `mastat_dv`, `jbstat`, `hiqual_dv`,
-`maedqf`, `paedqf`, `dep`, `dnc`, `fimnlabgrs_dv`, `fimnpen_dv`, `fimnmisc_dv`,
-`fiyrinvinc_dv`, `ficode`,  `ded`, `drtren`, `sedcsmpl`, `istrtdaty`, `hsownd`, 
-`fihhmnsben_dv`
+`maedqf`, `paedqf`, `fimnlabgrs_dv`, `fimnpen_dv`, `fimnmisc_dv`,
+`fiyrinvinc_dv`, `ficode`, `istrtdaty`, `hsownd`, `fihhmnsben_dv`
 
 ### Extra
+
 This is not the final table, extra columns are added from other datasets. In
 addition, certain USoc fields are derived from other variables. We employ this
-to reach the following goals: 
- - data validation. For example, if that's income, we need to be sure we get it
-for people who work full-time and salaried. 
- - fewer variables to process. Paradoxically, it's easier to work with raw data
-and produce derivatives *only* when needed at later stages.
+to reach the following goals:
+
+- data validation. For example, if that's income, we need to be sure we get it
+  for people who work full-time and salaried.
+- fewer variables to process. Paradoxically, it's easier to work with raw data
+  and produce derivatives *only* when needed at later stages.
 
 Since at the moment we work with Wave 1 only, we can drop *all* longitudinal
 weights; they are marked with the `_lw` suffix. For the same reason we also drop
 `indinub_xw` and `hhdenub_xw`.
 
 Next step is to:
- - drop `scghq2_dv`
- - replace `age_dv` with `age`; `sex_dv` with `sex`; `scghq1_dv` with
-`scghqa` to `scghql` to derive full GHQ score later; `fihhmnsben_dv` with 
-`fimnsben_dv`; `fimnlabgrs_dv` with `paygu_dv`, `seearngrs_dv`, and `j2pay_dv`;
-`scsf1` with `sf1` to take into account Wave 1 only
- - add `sf2a`, `sf2b`, `sf3a`, `sf3b`, `sf4a`, `sf4b`, `sf5`, `sf6a`, `sf6b`,
-`sf6c`, `sf7`, and `scflag_dv` to score version 2 of the SF-12® Health Survey;
-`jbft_dv` (full time employee marker); life satisfaction `sclfsato` indicator;
-financial distress indicator `finnow`
 
-The resulting list contains 61 fields per individual:
+- drop `scghq2_dv`
+- replace `scghq1_dv` with `scghqa` to `scghql` to derive full GHQ score later;
+  `fihhmnsben_dv` with `fimnsben_dv`; `fimnlabgrs_dv` with `paygu_dv`,
+  `seearngrs_dv`, and `j2pay_dv`; `scsf1` with `sf1` to take into account Wave 1
+  only
+- add `sf2a`, `sf2b`, `sf3a`, `sf3b`, `sf4a`, `sf4b`, `sf5`, `sf6a`, `sf6b`,
+  `sf6c`, `sf7`, and `scflag_dv` to score version 2 of the SF-12® Health Survey;
+  `jbft_dv` (full time employee marker); life satisfaction `sclfsato` indicator;
+  financial distress indicator `finnow`
+
+The resulting list contains 56 fields per individual:
 `hidp`, `pidp`, `ppid`, `fnspid`, `mnspid`, `gor_dv`, `indinus_xw`,
 `hhdenus_xw`, `pns1pid`, `pns2pid`, `depchl_dv`, `mastat_dv`, `jbstat`,
-`hiqual_dv`, `maedqf`, `paedqf`, `dep`, `dnc`, `fimnpen_dv`, `fimnmisc_dv`,
-`fiyrinvinc_dv`, `ficode`, `ded`, `drtren`, `sedcsmpl`, `istrtdaty`, `hsownd`,
-`sex`, `age`, `scghqa`, `scghqb`, `scghqc`, `scghqd`, `scghqe`, `scghqf`,
-`scghqg`, `scghqh`, `scghqi`, `scghqj`, `scghqk`, `scghql`, `fimnsben_dv`,
-`paygu_dv`, `seearngrs_dv`, `j2pay_dv`, `sf1`, `sf2a`, `sf2b`, `sf3a`, `sf3b`,
-`sf4a`, `sf4b`, `sf5`, `sf6a`, `sf6b`, `sf6c`, `sf7`, `scflag_dv`, `jbft_dv`,
-`sclfsato`, `finnow`
-
+`hiqual_dv`, `maedqf`, `paedqf`, `fimnpen_dv`, `fimnmisc_dv`, `fiyrinvinc_dv`,
+`ficode`, `istrtdaty`, `hsownd`, `sex_dv`, `age_dv`, `scghqa`, `scghqb`,
+`scghqc`, `scghqd`, `scghqe`, `scghqf`, `scghqg`, `scghqh`, `scghqi`, `scghqj`,
+`scghqk`, `scghql`, `fimnsben_dv`, `paygu_dv`, `seearngrs_dv`, `j2pay_dv`,
+`sf1`, `sf2a`, `sf2b`, `sf3a`, `sf3b`, `sf4a`, `sf4b`, `sf5`, `sf6a`, `sf6b`,
+`sf6c`, `sf7`, `scflag_dv`, `jbft_dv`, `sclfsato`, `finnow`
 
 ### Definitions
-A dependent child is defined as one aged under 16 or aged 16-18 and in school or
-non-advanced further education, not married and living with parent. It does not 
-include any children who have a spouse, partner or child living in the
-household. 
 
-Miscellaneous Income is: (educational grant (not student loan or tuition fee 
+A dependent child is defined as one aged under 16 or aged 16-18 and in school or
+non-advanced further education, not married and living with parent. It does not
+include any children who have a spouse, partner or child living in the
+household.
+
+Miscellaneous Income is: (educational grant (not student loan or tuition fee
 loan), payments from a family member not living here, or any other regular
 payment)
-
-`dep` is calculated using the following `SAS` code:
-
-```SAS
-*Length of cohabitation;
-array chb [*] currpart1-currpart7;
-array chbms [*] lmcbm1-lmcbm7;
-array chbys [*] lmcby41-lmcby47;
-
-do i=1 to dim(chb);
- if chb(i) = 1 then do;
-  if chbms(i) = . and chbys(i) ne . then do;
-   if mod(pid,2)=1 then chbms(i) = 3;
-   else chbms(i) = 10; 
-  end;
- D_CChb = mdy(chbms(i),15,chbys(i));
- end;
-drop i;
-end;
-
-if LCMARM = . and LCMARY4 ne . then do;
- if mod(pid,2)=1 then LCMARM = 5;
- else LCMARM = 6; 
-end;
-
-if LCMCBM = . and LCMCBY4 ne . then do;
- if mod(pid,2)=1 then LCMCBM = 3;
- else LCMCBM = 10; 
-end;
-
-D_Cohab = mdy(lcmcbm,15,lcmcby4);
-D_Mrrg = mdy(lcmarm,15,lcmary4);
-
-Cohab_Dur = intck('year',D_Cohab,Int_Date,'C');
-if Cohab_Dur = . and D_Mrrg ne . then do;
- Cohab_Dur = intck('year',D_Mrrg,Int_Date,'C');
-end;
-
-if Cohab_Dur = . and D_CChb ne . then do;
- Cohab_Dur = intck('year',D_CChb,Int_Date,'C');
-end;
-```
