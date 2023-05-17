@@ -272,7 +272,7 @@ def _read_usoc_fields(path_: str | Path = None,
 
     Parameters
     ----------
-        path_ : str
+        path_ : str or Path
             The path to a directory containing .csv files, `None` by default.
         verbose : bool
             A boolean flag that allows to print out filenames and corresponding
@@ -321,7 +321,7 @@ def convert_stata_csv(path_: str | Path = None, prefix_: str = 'a_') -> None:
 
     Parameters
     ----------
-        path_ : str
+        path_ : str or Path
             The path to a directory containing .dta files.
         prefix_ : str
             The wave prefix.
@@ -343,7 +343,7 @@ def _find_dangling_fields(path_: str | Path = None) -> set:
 
     Parameters
     ----------
-        path_ : str
+        path_ : str or Path
             The path to a directory containing .csv files, `None` by default.
 
     Returns
