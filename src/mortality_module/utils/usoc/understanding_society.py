@@ -124,9 +124,6 @@ def merge_usoc_data(path_: str | Path = None) -> pd.DataFrame:
                        right_on=['pidp', 'hidp'])
             )
 
-    for i in range(1, len(FICODE) + 1):
-        data[f'ficode_{i}'] = data[f'ficode_{i}'].fillna(0).astype(bool)
-
     household_response = load_file('hhresp')
     data = (data.merge(household_response,
                        how='left',
