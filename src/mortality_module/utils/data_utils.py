@@ -16,11 +16,10 @@ def load_census_data() -> DataFrame:
 
     Contains the following field:
         people_total    808 non-null uint32;
-    """
 
-    with resources.path(
-        "mortality_module.data", "uk_2011_census_age_sex_country.csv"
-    ) as f:
+    """
+    with resources.path("mortality_module.data",
+                        "uk_2011_census_age_sex_country.csv") as f:
         df = read_csv(f).set_index(["year", "sex", "age_group", "country"])
         df["people_total"] = df["people_total"].astype("uint32")
     return df
@@ -40,9 +39,10 @@ def load_mortality_rates() -> DataFrame:
 
     Contains the following field:
         mortality_rate    72720 non-null float64;
-    """
 
-    with resources.path("mortality_module.data", "uk_2022_mortality_rates.csv") as f:
+    """
+    with resources.path("mortality_module.data",
+                        "uk_2022_mortality_rates.csv") as f:
         df = read_csv(f).set_index(["year", "sex", "age_group", "country"])
     return df
 
@@ -61,9 +61,10 @@ def load_birth_numbers() -> DataFrame:
 
     Contains the following field:
         birth_number    168 non-null uint32;
-    """
 
+    """
     with resources.path("mortality_module.data", "uk_2021_births.csv") as f:
         df = read_csv(f)
         df["age_group"] = df["age_group"].astype(str)
-    return df.set_index(["year", "sex", "age_group", "country"]).astype("uint32")
+    return df.set_index(["year", "sex", "age_group",
+                         "country"]).astype("uint32")
