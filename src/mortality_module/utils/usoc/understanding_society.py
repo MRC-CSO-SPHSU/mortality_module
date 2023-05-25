@@ -171,6 +171,8 @@ def merge_usoc_data(path_: str | Path =
                                  right_on=['hidp'])
                           )
 
+    data = data.rename(columns=USOC_NAME_MAP)
+    household_response = household_response.rename(columns=USOC_NAME_MAP)
     return data, household_response
 
 
