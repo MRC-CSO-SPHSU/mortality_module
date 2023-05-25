@@ -1,14 +1,16 @@
 from pathlib import Path
-from sklearn.preprocessing import MultiLabelBinarizer
+from typing import Tuple
 
 import pandas as pd
+from sklearn.preprocessing import MultiLabelBinarizer
 
 from mortality_module.utils.usoc.usoc_constants import *
 from mortality_module.utils.utils import path_validation
 
 
-def merge_usoc_data(path_: str | Path = None) -> pd.DataFrame:
-    """ Combines all provided USoc files into a single table of individuals.
+def merge_usoc_data(path_: str | Path =
+                    None) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    """Merges all provided USoc data into tables for individuals and households.
 
     A raw data pre-processor, this method merges multiple tables together using
     household and person ids as keys. In the case when field values differ
@@ -21,8 +23,9 @@ def merge_usoc_data(path_: str | Path = None) -> pd.DataFrame:
 
     Returns
     -------
-    pd.DataFrame
-        A single dataframe with all required individual data.
+    tuple
+        A tuple of two dataframes, one contains data per individual, the other
+         one - per household.
 
     """
     p_ = path_validation(path_)
@@ -125,12 +128,50 @@ def merge_usoc_data(path_: str | Path = None) -> pd.DataFrame:
             )
 
     household_response = load_file('hhresp')
-    data = (data.merge(household_response,
-                       how='left',
-                       left_on=['hidp'],
-                       right_on=['hidp'])
-            )
-    return data
+
+    dates = data.copy().reset_index()[['istrtdaty', 'hidp']]
+    locations = data.copy().reset_index()[['gor_dv', 'hidp']]
+
+    data = data.drop(columns=['gor_dv', 'istrtdaty'])
+
+    def clean_household_variables(df_: pd.DataFrame, name_: str, type_):
+        df_ = (df_
+               .drop_duplicates()
+               .groupby(['hidp'])[name_]
+               .apply(list)
+               .reset_index()
+               )
+
+        def _parser(list_):
+            p = []
+            for l_ in list_:
+                try:
+                    p.append(type_(l_))
+                except ValueError:
+                    continue
+            p = set(p)
+            return p.pop() if len(p) > 0 else None
+
+        df_[name_] = df_[name_].apply(_parser)
+        return df_
+
+    dates = clean_household_variables(dates, 'istrtdaty', int)
+    locations = (clean_household_variables(locations, 'gor_dv', str)
+                 .apply(lambda x: x.str.strip() if x.dtype == "object" else x)
+                 )
+
+    household_response = (household_response
+                          .merge(dates,
+                                 how='inner',
+                                 left_on=['hidp'],
+                                 right_on=['hidp'])
+                          .merge(locations,
+                                 how='inner',
+                                 left_on=['hidp'],
+                                 right_on=['hidp'])
+                          )
+
+    return data, household_response
 
 
 def _read_usoc_fields(path_: str | Path = None,
