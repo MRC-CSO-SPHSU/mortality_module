@@ -19,7 +19,7 @@ USOC_NAME_MAP: Final[Annotated[Dict[str, List[str]], 6]] = {
     'mnspid': 'id_mother',
     'pns1pid': 'id_parent1',
     'pns2pid': 'id_parent2',
-    'gor_dv': 'constituent_country',
+    'gor_dv': 'location',
     'indinus_xw': 'weight_person',
     'hhdenus_xw': 'weight_household',
     'depchl_dv': 'indicator_dependent_child',
