@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "mortality_module"
 version = "0.0.1"
 description = "Population dynamics"
-license = " 	AGPL-3.0-only"
+license = "AGPL-3.0-only"
 authors = [
     "Vladimir Khodygo <vladimir.khodygo@glasgow.ac.uk>",
 ]
