@@ -11,7 +11,7 @@ USOC_FIELDS: Final[Annotated[List[str], 56]] = [
     'sf4b', 'sf5', 'sf6a', 'sf6b', 'sf6c', 'sf7', 'scflag_dv', 'jbft_dv',
     'sclfsato', 'finnow']
 
-USOC_NAME_MAP: Final[Annotated[Dict[str, List[str]], 6]] = {
+USOC_NAME_MAP: Final[Annotated[Dict[str, str], 56]] = {
     'hidp': 'id_household',
     'pidp': 'id_person',
     'ppid': 'id_partner',
