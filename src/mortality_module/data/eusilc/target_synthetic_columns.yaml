@@ -1,0 +1,55 @@
+# TODO we can't generate personal weights, set them to 1
+H:
+  HB030: household
+  HH021: tenure
+  HY040G: rental_property
+  HY090G: investment
+  HX060: household_type
+  HB120: household_size
+  HH010: dwelling_type
+  HB110: household_type2
+  HH030: number_of_rooms
+
+R:
+  RB030: person
+  RX030: household
+  RB081: age
+  RB090: sex
+  RB211: job_status
+  RB032: internal # not formally needed, but is convenient to use
+  RB200: is_resident
+  RB220: father
+  RB230: mother
+  RB240: partner
+  RB280: country_birth # temp for ehis matching
+
+P:
+  PB030: person
+  PX030: household
+  PB190: marital_status
+  PB200: consensual_union
+  PE010: is_student
+  PE041: education_level
+  PH010: health
+  PH020: is_long_term_sick
+  PH030: limitations_health
+  PW010: life_satisfaction
+  PY010G: gross_salary  # TODO check this one
+  PY020G: non_cash
+  PY050G: self_employment
+  PY100G: old_age_benefits
+  PL060: hours
+  PL145: full_time
+  PH110A: bmi_weight
+  PH110B: bmi_height
+  PS042: read_books # temp
+  PL051A: occupation_job # temp for ehis matching
+
+  # TODO weights are different, but other attributes are not?
+# see also RL070
+D:
+  DB030: household
+  DB040: region # NUTS regional flag
+  DB090: household_cross_section
+  DB100: urbanization # temp
+

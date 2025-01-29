@@ -1,0 +1,583 @@
+Year: 2022
+MetadataVersion: 7
+Values:
+
+  HB010:
+    Name: YEAR OF THE SURVEY
+    Type: ordinal
+    DataType: uint16[pyarrow]
+    Extra: [ "NotFlagged" ]
+    Range: 2022
+
+  HB020:
+    Name: COUNTRY OF RESIDENCE
+    Type: category
+    DataType: str
+    Extra: [ "NotFlagged" ]
+    Range: [ "be", "bg", "cz", "dk", "de", "ee", "ie", "el", "es", "fr", "hr",
+             "it", "cy", "lv", "lt", "lu", "hu", "mt", "nl", "at", "pl", "pt",
+             "ro", "si", "sk", "fi", "se", "uk", "ch", "is", "no", "me", "mk",
+             "rs", "tr", "al", "xk" ]
+
+  HB030:
+    Name: HOUSEHOLD ID
+    Type: id
+    Extra: [ "NotFlagged" ]
+    Range:
+      Min: 1
+      Max: 9999999
+
+  HB040:
+    Name: DAY OF HOUSEHOLD INTERVIEW
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Extra: [ "NotDisseminated" ]
+    Range:
+      Min: 1
+      Max: 31
+
+  HB050:
+    Name: MONTH OF HOUSEHOLD INTERVIEW
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Extra: [ "Recoded" ]
+    Range:
+      Min: 1
+      Max: 12
+
+  HB060:
+    Name: YEAR OF HOUSEHOLD INTERVIEW
+    Type: ordinal
+    DataType: uint16[pyarrow]
+    Range: 2022
+
+  HB070:
+    Name: PERSON RESPONDING TO THE HOUSEHOLD QUESTIONNAIRE
+    Type: id
+    Range:
+      Min: None
+      Max: None # TODO check this one
+
+  HB100:
+    Name: NUMBER OF MINUTES TO COMPLETE THE HOUSEHOLD QUESTIONNAIRE
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 90
+
+  HB110:
+    Name: HOUSEHOLD TYPE
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 7
+
+  HB120:
+    Name: HOUSEHOLD SIZE
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 99
+
+  HB130:
+    Name: INTERVIEW MODE USED (HOUSEHOLD)
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 5
+
+  HH010:
+    Name: DWELLING TYPE
+    Type: category
+    DataType: uint8[pyarrow]
+    Extra: [ "Recoded" ]
+    Range:
+      Min: 1
+      Max: 5
+
+  HH021:
+    Name: TENURE STATUS
+    Type: category # TODO ordinal?
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 5
+
+  HH030:
+    Name: NUMBER OF ROOMS AVAILABLE TO THE HOUSEHOLD
+    Type: ordinal
+    # this is probably the only case of an ordinal variable represented by float
+    DataType: float16[pyarrow]
+    Extra: [ "Capped" ]
+    Range:
+      Min: 1
+      Max: 10
+
+  HH050:
+    Name: ABILITY TO KEEP HOME ADEQUATELY WARM
+    Type: indicator
+
+  HH060:
+    Name: CURRENT RENT RELATED TO THE OCCUPIED DWELLING
+    Type: income
+    Range:
+      Min: 1
+
+  HH070:
+    Name: TOTAL HOUSING COST
+    Type: income
+
+  HH071:
+    Name: MORTGAGE PRINCIPAL REPAYMENT
+    Type: income
+
+  HS011:
+    Name: ARREARS ON MORTGAGE OR RENTAL PAYMENTS
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 3
+
+  HS021:
+    Name: ARREARS ON UTILITY BILLS
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 3
+
+  HS022:
+    Name: REDUCED UTILITY COSTS
+    Type: indicator
+
+  HS031:
+    Name: ARREARS ON HIRE PURCHASE INSTALMENTS OR OTHER LOAN PAYMENTS
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 3
+
+  HS040:
+    Name: CAPACITY TO AFFORD PAYING FOR ONE WEEK ANNUAL HOLIDAY AWAY FROM HOME
+    Type: indicator
+
+  HS050:
+    Name: CAPACITY TO AFFORD A MEAL WITH MEAT, CHICKEN, FISH OR VEGETARIAN EQUIVALENT EVERY SECOND DAY
+    Type: indicator
+
+  HS060:
+    Name: CAPACITY TO FACE UNEXPECTED FINANCIAL EXPENSES
+    Type: indicator
+
+  HS090:
+    Name: DO YOU HAVE A COMPUTER
+    Type: category
+    DataType: uint8[pyarrow]
+    Extra: [ "Splittable" ]
+    Range:
+      Min: 1
+      Max: 3
+
+  HS110:
+    Name: DO YOU HAVE A CAR
+    Type: category
+    DataType: uint8[pyarrow]
+    Extra: [ "Splittable" ]
+    Range:
+      Min: 1
+      Max: 3
+
+  HS120:
+    Name: ABILITY TO MAKE ENDS MEET
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 6
+
+  HS150:
+    Name: FINANCIAL BURDEN OF THE REPAYMENT OF DEBTS FROM HIRE PURCHASES OR LOANS
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 3
+
+  HD080:
+    Name: REPLACING WORN-OUT FURNITURE
+    Type: category
+    DataType: uint8[pyarrow]
+    Extra: [ "Splittable" ]
+    Range:
+      Min: 1
+      Max: 3
+
+  HI010:
+    Name: CHANGE IN THE HOUSEHOLD INCOME COMPARED TO PREVIOUS YEAR
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 3
+
+  HI020:
+    Name: REASON FOR INCREASE IN INCOME
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 7
+
+  HI030:
+    Name: REASON FOR DECREASE IN INCOME
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 9
+
+  HI040:
+    Name: EXPECTATION OF THE HOUSEHOLD INCOME IN THE NEXT 12 MONTHS
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 3
+
+  HY010:
+    Name: TOTAL HOUSEHOLD GROSS INCOME
+    Type: income
+    Range:
+      Min: -999999.99
+
+  HY020:
+    Name: TOTAL DISPOSABLE HOUSEHOLD INCOME
+    Type: income
+    Range:
+      Min: -999999.99
+
+  HY022:
+    Name: TOTAL DISPOSABLE HOUSEHOLD INCOME BEFORE SOCIAL TRANSFERS OTHER THAN OLD-AGE AND SURVIVOR’S BENEFITS
+    Type: income
+    Range:
+      Min: -999999.99
+
+  HY023:
+    Name: TOTAL DISPOSABLE HOUSEHOLD INCOME BEFORE SOCIAL TRANSFERS INCLUDING OLD-AGE AND SURVIVOR’S BENEFITS
+    Type: income
+    Range:
+      Min: -999999.99
+
+  HY040G:
+    Name: INCOME FROM RENTAL OF A PROPERTY OR LAND
+    Type: income
+
+  HY040N:
+    Name: INCOME FROM RENTAL OF A PROPERTY OR LAND
+    Type: income
+
+  HY050G:
+    Name: FAMILY/CHILDREN-RELATED ALLOWANCES
+    Type: income
+
+  HY050N:
+    Name: FAMILY/CHILDREN-RELATED ALLOWANCES
+    Type: income
+
+  HY051G:
+    Name: FAMILY/CHILDREN-RELATED ALLOWANCES [CONTRIBUTORY AND MEANS-TESTED]
+    Type: income
+
+  HY052G:
+    Name: FAMILY/CHILDREN-RELATED ALLOWANCES [CONTRIBUTORY AND NON-MEANS TESTED]
+    Type: income
+
+  HY053G:
+    Name: FAMILY/CHILDREN-RELATED ALLOWANCES [NON-CONTRIBUTORY AND MEANS-TESTED]
+    Type: income
+
+  HY054G:
+    Name: FAMILY/CHILDREN-RELATED ALLOWANCE [NON-CONTRIBUTORY AND NON-MEANS-TESTED]
+    Type: income
+
+  HY060G:
+    Name: SOCIAL EXCLUSION NOT ELSEWHERE CLASSIFIED
+    Type: income
+
+  HY060N:
+    Name: SOCIAL EXCLUSION NOT ELSEWHERE CLASSIFIED
+    Type: income
+
+  HY061G:
+    Name: SOCIAL EXCLUSION NOT ELSEWHERE CLASSIFIED [CONTRIBUTORY AND MEANS-TESTED]
+    Type: income
+
+  HY062G:
+    Name: SOCIAL EXCLUSION NOT ELSEWHERE CLASSIFIED [CONTRIBUTORY AND NON-MEANS-TESTED]
+    Type: income
+
+  HY063G:
+    Name: SOCIAL EXCLUSION NOT ELSEWHERE CLASSIFIED [NON-CONTRIBUTORY AND MEANS-TESTED]
+    Type: income
+
+  HY064G:
+    Name: SOCIAL EXCLUSION NOT ELSEWHERE CLASSIFIED [NON-CONTRIBUTORY AND NON-MEANS-TESTED]
+    Type: income
+
+  HY070G:
+    Name: HOUSING ALLOWANCES
+    Type: income
+
+  HY070N:
+    Name: HOUSING ALLOWANCES
+    Type: income
+
+  HY071G:
+    Name: HOUSING ALLOWANCES [CONTRIBUTORY AND MEANS-TESTED]
+    Type: income
+
+  HY072G:
+    Name: HOUSING ALLOWANCES [CONTRIBUTORY AND NON-MEANS-TESTED]
+    Type: income
+
+  HY073G:
+    Name: HOUSING ALLOWANCES [NON-CONTRIBUTORY AND MEANS-TESTED]
+    Type: income
+
+  HY074G:
+    Name: HOUSING ALLOWANCES [NON-CONTRIBUTORY AND NON-MEANS-TESTED]
+    Type: income
+
+  HY080G:
+    Name: REGULAR INTER-HOUSEHOLD CASH TRANSFER RECEIVED
+    Type: income
+
+  HY080N:
+    Name: REGULAR INTER-HOUSEHOLD CASH TRANSFER RECEIVED
+    Type: income
+
+  HY081G:
+    Name: ALIMONIES RECEIVED [COMPULSORY + VOLUNTARY]
+    Type: income
+
+  HY081N:
+    Name: ALIMONIES RECEIVED [COMPULSORY + VOLUNTARY]
+    Type: income
+
+  HY090G:
+    Name: INTEREST, DIVIDENDS, PROFIT FROM CAPITAL INVESTMENTS IN UNICORPORATED BUSINESS
+    Type: income
+
+  HY090N:
+    Name: INTEREST, DIVIDENDS, PROFIT FROM CAPITAL INVESTMENTS IN UNICORPORATED BUSINESS
+    Type: income
+
+  HY100G:
+    Name: INTEREST REPAYMENTS ON MORTGAGE
+    Type: income
+
+  HY100N:
+    Name: INTEREST REPAYMENTS ON MORTGAGE
+    Type: income
+
+  HY110G:
+    Name: INCOME RECEIVED BY PEOPLE AGED UNDER 16
+    Type: income
+
+  HY110N:
+    Name: INCOME RECEIVED BY PEOPLE AGED UNDER 16
+    Type: income
+
+  HY120G:
+    Name: REGULAR TAXES ON WEALTH
+    Type: income
+
+  HY120N:
+    Name: REGULAR TAXES ON WEALTH
+    Type: income
+
+  HY121G:
+    Name: TAXES PAID ON OWNERSHIP OF HOUSEHOLD MAIN DWELLING
+    Type: income
+    Range:
+      Min: -999999.99
+
+  HY121N:
+    Name: TAXES PAID ON OWNERSHIP OF HOUSEHOLD MAIN DWELLING
+    Type: income
+    Range:
+      Min: -999999.99
+
+  HY130G:
+    Name: REGULAR INTERHOUSEHOLD CASH TRANSFER PAID
+    Type: income
+
+  HY130N:
+    Name: REGULAR INTERHOUSEHOLD CASH TRANSFER PAID
+    Type: income
+
+  HY131G:
+    Name: ALIMONIES PAID [COMPULSORY + VOLUNTARY]
+    Type: income
+
+  HY131N:
+    Name: ALIMONIES PAID [COMPULSORY + VOLUNTARY]
+    Type: income
+
+  HY140G:
+    Name: TAX ON INCOME AND SOCIAL CONTRIBUTIONS
+    Type: income
+    Range:
+      Min: -999999.99
+
+  HY140N:
+    Name: TAX ON INCOME AND SOCIAL CONTRIBUTIONS
+    Type: income
+    Range:
+      Min: -999999.99
+
+  HY145N:
+    Name: REPAYMENTS/RECEIPTS FOR TAX ADJUSTMENT
+    Type: income
+    Range:
+      Min: -999999.99
+
+  HY170G:
+    Name: VALUE OF GOODS PRODUCED FOR OWN CONSUMPTION
+    Type: income
+
+  HY170N:
+    Name: VALUE OF GOODS PRODUCED FOR OWN CONSUMPTION
+    Type: income
+
+  HS200:
+    Name: FINANCIAL BURDEN OF MEDICAL CARE (EXCLUDING MEDICINES)
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 3
+
+  HS210:
+    Name: FINANCIAL BURDEN OF DENTAL CARE
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 3
+
+  HS220:
+    Name: FINANCIAL BURDEN OF MEDICINES
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 3
+
+  HI012:
+    Name: CHANGE IN INCOME AS AN OUTCOME OF COVID-19 (OPTIONAL)
+    Type: indicator
+
+  HY150_1:
+    Name: FINANCIAL SUPPORT (GOVERNMENT FUNDED) FROM THE COVID-19 RELATED SUPPORT SCHEMES DURING 2021 (OPTIONAL)
+    Type: indicator
+
+  HY150_2:
+    Name: FINANCIAL SUPPORT (GOVERNMENT FUNDED) FROM THE COVID-19 RELATED SUPPORT SCHEMES DURING 2021 (OPTIONAL)
+    Type: indicator
+
+  HY150_3:
+    Name: FINANCIAL SUPPORT (GOVERNMENT FUNDED) FROM THE COVID-19 RELATED SUPPORT SCHEMES DURING 2021 (OPTIONAL)
+    Type: indicator
+
+  HY150_4:
+    Name: FINANCIAL SUPPORT (GOVERNMENT FUNDED) FROM THE COVID-19 RELATED SUPPORT SCHEMES DURING 2021 (OPTIONAL)
+    Type: indicator
+
+  HY155G_1:
+    Name: AMOUNT RECEIVED AS FINANCIAL SUPPORT FROM THE COVID-19 RELATED SUPPORT SCHEMES DURING 2021 (OPTIONAL)
+    Type: income
+
+  HY155G_2:
+    Name: AMOUNT RECEIVED AS FINANCIAL SUPPORT FROM THE COVID-19 RELATED SUPPORT SCHEMES DURING 2021 (OPTIONAL)
+    Type: income
+
+  HY155G_3:
+    Name: AMOUNT RECEIVED AS FINANCIAL SUPPORT FROM THE COVID-19 RELATED SUPPORT SCHEMES DURING 2021 (OPTIONAL)
+    Type: income
+
+  HY155G_4:
+    Name: AMOUNT RECEIVED AS FINANCIAL SUPPORT FROM THE COVID-19 RELATED SUPPORT SCHEMES DURING 2021 (OPTIONAL)
+    Type: income
+
+  HD225:
+    Name: DISTANCE LEARNING COURSES/SCHOOL DURING COVID-19 RESTRICTIONS (OPTIONAL)
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 5
+
+  HI130G:
+    Name: INTEREST EXPENSES [NOT INCLUDING INTEREST EXPENSES FOR PURCHASING THE MAIN DWELLING] (OPTIONAL)
+    Type: income
+
+  HI140G:
+    Name: HOUSEHOLD DEBTS (OPTIONAL)
+    Type: income
+
+  HX010:
+    Name: Change rate
+    Type: #TODO
+    Extra: [ "Calculated", "NotFlagged" ]
+
+
+  HX040:
+    Name: Household size
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Extra: [ "Calculated", "NotFlagged" ]
+    Range:
+      Min: 1
+
+  HX050:
+    Name: Equivalised household size
+    Type: ordinal
+    DataType: float16[pyarrow]
+    Extra: [ "Calculated", "NotFlagged" ]
+    # TODO range
+
+  HX060:
+    Name: Household type
+    Type: category
+    DataType: uint8[pyarrow]
+    Extra: [ "Calculated", "NotFlagged" ]
+    Range: [ 5, 6, 7, 8, 9, 10, 11, 12, 13, 16 ]
+
+  HX070:
+    Name: Tenure status
+    Type: indicator
+    Extra: [ "Calculated", "NotFlagged" ]
+
+  HX080:
+    Name: Poverty indicator
+    Type: indicator
+    Extra: [ "Calculated", "NotFlagged" ]
+
+  HX090:
+    Name: Equivalised disposable income
+    Type: income
+    Extra: [ "Calculated", "NotFlagged" ]
+    Range:
+      Min: -999999.99
+
+  HX120:
+    Name: Overcrowded household (0=not overcrowded, 1=overcrowded,.=N/A)
+    Type: indicator
+    Extra: [ "Calculated", "NotFlagged" ]

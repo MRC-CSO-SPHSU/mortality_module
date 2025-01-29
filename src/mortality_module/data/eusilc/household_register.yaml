@@ -1,0 +1,133 @@
+Year: 2022
+MetadataVersion: 7
+Values:
+
+  DB010:
+    Name: YEAR OF THE SURVEY
+    Type: ordinal
+    DataType: uint16[pyarrow]
+    Extra: [ "NotFlagged" ]
+    Range: 2022
+
+  DB020:
+    Name: COUNTRY OF RESIDENCE
+    Type: category
+    DataType: str
+    Extra: [ "NotFlagged" ]
+    Range: [ "be", "bg", "cz", "dk", "de", "ee", "ie", "el", "es", "fr", "hr",
+             "it", "cy", "lv", "lt", "lu", "hu", "mt", "nl", "at", "pl", "pt",
+             "ro", "si", "sk", "fi", "se", "uk", "ch", "is", "no", "me", "mk",
+             "rs", "tr", "al", "xk" ]
+
+  DB030:
+    Name: HOUSEHOLD ID
+    Type: id
+    Extra: [ "NotFlagged" ]
+    Range:
+      Min: 1
+      Max: 9999999
+
+  DB040:
+    Name: REGION OF RESIDENCE
+    Type: category
+    DataType: str # TODO replace with integers
+    Extra: ["Recoded"]
+    Range:
+      Min: None
+      Max: None
+    # TODO range depends on country
+
+  DB050:
+    Name: STRATUM
+    Type: id
+    Extra: [ "NotDisseminated" ]
+    Range:
+      Min: 1
+      Max: 99999
+
+  DB060:
+    Name: PRIMARY SAMPLING UNITS [PSU]
+    Type: id
+    Extra: ["Randomised"]
+    Range:
+      Min: 1
+      Max: 99999
+
+  DB062:
+    Name: SECONDARY SAMPLING UNITS [SSU]
+    Type: id
+    Extra: ["Randomised"]
+    Range:
+      Min: 1
+      Max: 99999
+
+  DB070:
+    Name: ORDER OF SELECTION OF PSU
+    Type: id
+    Range:
+      Min: 1
+      Max: 99999
+
+  DB075:
+    Name: ROTATION GROUP
+    Type: id
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 9
+
+  DB076:
+    Name: INTERVIEW WAVE
+    Type: id
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 9
+
+  DB080:
+    Name: HOUSEHOLD DESIGN WEIGHT
+    Type: weight
+    Extra: [ "NotDisseminated" ]
+
+  DB090:
+    Name: HOUSEHOLD CROSS-SECTIONAL WEIGHT
+    Type: weight
+
+  DB095:
+    Name: HOUSEHOLD LONGITUDINAL WEIGHT
+    Type: weight
+
+  DB100:
+    Name: DEGREE OF URBANISATION
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 3
+
+  DB110:
+    Name: HOUSEHOLD STATUS
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 10
+
+  DB120:
+    Name: CONTACT AT ADDRESS
+    Type: category
+    DataType: uint8[pyarrow]
+    Extra: [ "NotDisseminated" ]
+    Range: [ 11, 21, 22, 23 ]
+
+  DB130:
+    Name: HOUSEHOLD QUESTIONNAIRE RESULT
+    Type: category
+    DataType: uint8[pyarrow]
+    Extra: [ "NotDisseminated" ]
+    Range: [ 11, 21, 22, 23, 24 ]
+
+  DB135:
+    Name: HOUSEHOLD INTERVIEW ACCEPTANCE
+    Type: indicator
+    Extra: [ "NotDisseminated" ]

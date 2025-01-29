@@ -1,0 +1,10 @@
+Flags: ["Splittable",
+        "NotDisseminated",
+        "NotFlagged",
+        "ImputedFactor",
+        "Capped",
+        "Calculated", # TODO rework code: any calculated column has no flags by definition
+        "Recoded",
+        "Randomised"
+]
+# TODO country specific rules

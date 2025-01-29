@@ -1,0 +1,28 @@
+indicator_:
+  sdtype: boolean
+
+ordinal_:
+  sdtype: numerical
+  computer_representation: UInt8
+
+income_:
+  sdtype: numerical
+  computer_representation: Int32
+
+category_:
+  sdtype: categorical
+
+minutes_:
+  sdtype: numerical
+  computer_representation: UInt16
+
+hours_:
+  sdtype: numerical
+  computer_representation: UInt8
+
+total_:
+  sdtype: numerical
+  computer_representation: UInt8
+
+mlb_:
+  sdtype: boolean

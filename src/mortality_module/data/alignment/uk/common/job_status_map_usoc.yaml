@@ -1,0 +1,18 @@
+# NOTE: this is a reversed v:k mapping to avoid limitations of YAML parser
+# the parameters are the following: is_employed, is_self_employed, employed_full_time, self_employed_full_time, category_job
+
+1: [[True, False, True, False, 2], [True, False, True, False, 5]] # 1: Employed Full-time
+# people on maternity leave i.e. with code 5 who are employed are seen as such
+2: [[True, False, False, False, 2], [True, False, False, False, 5]] # 2: Employed Part-time
+3: [[False, True, False, True, 1], [False, True, False, True, 5]] # 3: Self-employed Full-time
+4: [[False, True, False, False, 1], [False, True, False, False, 5]] # 4: Self-employed Part-time
+5: [[null, null, null, null, 3], [False, False, False, False, 5], [null, null, null, null, 10]] # 5: Unemployed
+6: [[True, False, True, False, 7]] # 6: Student (Employed Full-time)
+7: [[True, False, False, False, 7]] # 7: Student (Employed Part-time)
+8: [[False, True, null, null, 7]] # 8: Student (Self-employed)
+9: [[False, False, False, False, 7], [null, null, null, null, 9]] # 9: Student (Unemployed)
+10: [[null, null, null, null, 10]] # 10: Retired
+11: [[null, null, null, null, 6]] # 11: Family care or home
+12: [[null, null, null, null, 8]]  # 12: Long-term sick or disabled
+13: [[null, null, null, null, 97]] # 13: Other
+

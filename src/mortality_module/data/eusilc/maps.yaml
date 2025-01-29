@@ -1,0 +1,41 @@
+# contains maps for booleans and certain categories that are ordinal by nature, but not ordered properly
+HS011:
+  1: 1 # yes, once
+  2: 2 # yes, twice or more
+  3: 0 # no
+
+HS021:
+  1: 1 # yes, once
+  2: 2 # yes, twice or more
+  3: 0 # no
+
+HS031:
+  1: 1 # yes, once
+  2: 2 # yes, twice or more
+  3: 0 # no
+
+RX050:
+  0: False
+  1: True
+  2:
+
+RX060:
+  0: False
+  1: True
+
+HX070:
+  1: True
+  2: False
+# TODO this one is arbitrary
+
+HX080:
+  0: False
+  1: True
+
+HX120:
+  0: False
+  1: True
+
+RB200:
+  1: True
+  2: False

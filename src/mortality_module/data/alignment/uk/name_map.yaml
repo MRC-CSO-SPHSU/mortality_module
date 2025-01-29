@@ -1,0 +1,25 @@
+age: ordinal_person_age
+# ageh: ordinal_person_age  # for LA dataset
+health: ordinal_person_sf1
+sex: indicator_person_sex
+ethnicityew: category_person_ethnic_group
+religionew: category_person_religion
+ecopuk: category_person_job_status
+# ecopuk11: category_person_job_status # for LA dataset
+marstat: category_person_legal_marital_status
+hours: hours_person_week_coarse
+hlqupuk11: ordinal_highest_qualification
+nssec: category_nssec
+socmin: category_soc2010
+indgpuk11: category_sic2007
+
+tenure: category_household_house_ownership
+region: category_household_location
+ahchuk11: category_household_type
+cenheat: indicator_household_heating
+carsnoc: total_cars
+sizhuk: total_individuals
+
+empstat:
+popbasesec:
+residtype:

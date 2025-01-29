@@ -13,7 +13,7 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 
 setup(
     name="mortality_module",
-    version="0.0.1",
+    version="0.1.0",
     description="Population dynamics",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -21,20 +21,27 @@ setup(
     author="Vladimir Khodygo",
     author_email="vladimir.khodygo@glasgow.ac.uk",
     classifiers=[
-        "Development Status :: 1 - Planning",
+        "Development Status :: 3 - Alpha",
         "Intended Audience :: Science/Research",
         "Topic :: Software Development :: Build Tools",
         "License :: OSI Approved :: GNU Affero General Public License v3",
-        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.12",
     ],
     keywords="simulation",
     package_dir={"": "src"},
     packages=find_packages(where="src"),
-    python_requires=">=3.10",
-    install_requires=["numpy", "pandas"],
+    python_requires=">=3.12",
+    install_requires=["pyarrow>=19.0.0",
+                      "tqdm>=4.66.5",
+                      "yaml>=0.2.5",
+                      "scikit-learn>=1.6.1",
+                      "sdv>=1.17.3",
+                      "torch>=2.5.1"
+                      ],
     extras_require={
         "dev": ["check-manifest"],
         "test": ["coverage"],
     },
-    package_data={"data": ["uk_2011_census.csv", "uk_2020_mortality.csv"]},
+    include_package_data=True,
+    package_data={"mortality_module": ["*.yaml", "*.yml"]}
 )

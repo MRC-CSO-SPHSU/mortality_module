@@ -1,0 +1,484 @@
+Year: 2022
+MetadataVersion: 7
+Values:
+
+  RB010:
+    Name: YEAR OF THE SURVEY
+    Type: ordinal
+    DataType: uint16[pyarrow]
+    Extra: [ "NotFlagged" ]
+    Range: 2022
+
+  RB020:
+    Name: COUNTRY OF RESIDENCE
+    Type: category
+    DataType: str
+    Extra: [ "NotFlagged" ]
+    Range: [ "be", "bg", "cz", "dk", "de", "ee", "ie", "el", "es", "fr", "hr",
+             "it", "cy", "lv", "lt", "lu", "hu", "mt", "nl", "at", "pl", "pt",
+             "ro", "si", "sk", "fi", "se", "uk", "ch", "is", "no", "me", "mk",
+             "rs", "tr", "al", "xk" ]
+
+  RB030:
+    Name: PERSONAL ID
+    Type: id
+    Extra: [ "NotFlagged" ]
+    Range:
+      Min: None # todo find the range
+      Max: None
+
+  RB032:
+    Name: SEQUENTIAL NUMBER OF THE PERSONS IN THE HOUSEHOLD
+    Type: id
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 20
+
+  RB040:
+    Name: CURRENT HOUSEHOLD IDENTIFICATION (ID)
+    Type: id
+    Extra: [ "NotFlagged" ]
+    Range:
+      Min: 1 # TODO difference between household number and household id
+      Max: 999999
+
+  RB050:
+    Name: PERSONAL CROSS-SECTIONAL WEIGHT
+    Type: weight
+
+  RB060:
+    Name: PERSONAL BASE WEIGHT
+    Type: weight
+
+  RB062:
+    Name: LONGITUDINAL WEIGHT [TWO-YEAR DURATION]
+    Type: weight
+
+  RB063:
+    Name: LONGITUDINAL WEIGHT [THREE-YEAR DURATION]
+    Type: weight
+
+  RB064:
+    Name: LONGITUDINAL WEIGHT [FOUR-YEAR DURATION]
+    Type: weight
+
+  RB065:
+    Name: LONGITUDINAL WEIGHT [FIVE-YEAR DURATION]
+    Type: weight
+
+  RB066:
+    Name: LONGITUDINAL WEIGHT [SIX-YEAR DURATION]
+    Type: weight
+
+  RB080:
+    Name: YEAR OF BIRTH
+    Type: ordinal
+    DataType: uint16[pyarrow]
+    Extra: [ "Capped" ]
+    Range:
+      Min: 1890 # TODO check the range
+      Max: None
+
+  RB081:
+    Name: AGE IN COMPLETED YEARS (AT THE END OF INCOME REFERENCE PERIOD)
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Extra: [ "Capped" ]
+    Range:
+      Min: None # TODO check the range
+      Max: None
+
+  RB082:
+    Name: AGE IN COMPLETED YEARS AT THE TIME OF THE INTERVIEW
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Extra: [ "Capped" ]
+    Range:
+      Min: None # TODO check the range
+      Max: None
+
+  RB083:
+    Name: PASSING OF BIRTHDAY AT THE TIME OF THE INTERVIEW
+    Type: indicator
+    Extra: [ "NotDisseminated" ]
+
+  RB090:
+    Name: SEX
+    Type: indicator
+
+  RB100:
+    Name: SAMPLE PERSON OR CO-RESIDENT
+    Type: indicator
+
+  RB110:
+    Name: MEMBERSHIP STATUS
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 6
+
+  RB120:
+    Name: LOCATION WHERE THE PERSON MOVED
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 4
+
+  RB200:
+    Name: RESIDENTIAL STATUS
+    Type: indicator
+
+  RB211:
+    Name: MAIN ACTIVITY STATUS (SELF-DEFINED)
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 8
+
+  RB220:
+    Name: FATHER ID
+    Type: id
+    Range:
+      Min: None # todo find the range
+      Max: None
+
+  RB230:
+    Name: MOTHER ID
+    Type: id
+    Range:
+      Min: None # todo find the range
+      Max: None
+
+  RB240:
+    Name: SPOUSE/PARTNER ID
+    Type: id
+    Range:
+      Min: None # todo find the range
+      Max: None
+
+  RB245:
+    Name: RESPONDENT STATUS
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 4
+
+  RB250:
+    Name: DATA STATUS
+    Type: category
+    DataType: uint8[pyarrow]
+    Range: [ 11, 12, 13, 14, 21, 22, 23, 31, 32, 33 ]
+
+  RB280:
+    Name: COUNTRY OF BIRTH
+    Type: category
+    DataType: str
+    Extra: [ "Recoded" ] # TODO think how to provide this info
+    Range:
+      Min: None # todo find the range
+      Max: None
+
+  RB285:
+    Name: DURATION OF STAY IN THE COUNTRY OF RESIDENCE IN COMPLETED YEARS
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Extra: [ "Recoded" ]
+    Range:
+      Min: None # todo find the range
+      Max: None
+
+  RB290:
+    Name: COUNTRY OF MAIN CITIZENSHIP
+    Type: category
+    DataType: str
+    Extra: [ "Recoded" ]
+    Range:
+      Min: None # todo find the range
+      Max: None
+
+  RL010:
+    Name: EDUCATION AT PRE-SCHOOL
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 0
+      Max: 99
+      # TODO think this one over
+    ApplicationLimit:
+      Target: RB082
+      Limit: 12
+      Operation: le
+      Mitigation: # FIXME
+
+  RL020:
+    Name: EDUCATION AT COMPULSORY SCHOOL
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 0
+      Max: 99
+    ApplicationLimit:
+      Target: RB082
+      Limit: 12
+      Operation: le
+
+  RL030:
+    Name: CHILDCARE AT CENTRE-BASED SERVICES [OUTSIDE SCHOOL HOURS (BEFORE/AFTER)]
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 0
+      Max: 99
+    ApplicationLimit:
+      Target: RB082
+      Limit: 12
+      Operation: le
+
+  RL040:
+    Name: CHILDCARE AT DAY-CARE CENTRE
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 0
+      Max: 99
+    ApplicationLimit:
+      Target: RB082
+      Limit: 12
+      Operation: le
+
+  RL050:
+    Name: CHILDCARE BY A PROFESSIONAL CHILD-MINDER AT CHILD’S HOME OR AT CHILD-MINDER’S HOME
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 0
+      Max: 99
+    ApplicationLimit:
+      Target: RB082
+      Limit: 12
+      Operation: le
+
+  RL060:
+    Name: CHILDCARE BY GRAND-PARENTS, HOUSEHOLD MEMBERS OTHER THAN PARENTS, OTHER RELATIVES, FRIENDS OR NEIGHBOURS
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 0
+      Max: 99
+    ApplicationLimit:
+      Target: RB082
+      Limit: 12
+      Operation: le
+
+  RL070:
+    Name: CHILDRENS’ CROSS-SECTIONAL WEIGHT FOR CHILDCARE
+    Type: weight
+    ApplicationLimit:
+      Target: RB082
+      Limit: 12
+      Operation: le
+
+  RG_1:
+    Type: category
+    DataType: uint8[pyarrow]
+    Range: [ 10, 11, 12, 20, 21, 22, 30, 40, 50,
+             51, 52, 60, 70, 80, 81, 82, 90, 95 ]
+
+  RG_2:
+    Type: category
+    DataType: uint8[pyarrow]
+    Range: [ 10, 11, 12, 20, 21, 22, 30, 40, 50,
+             51, 52, 60, 70, 80, 81, 82, 90, 95 ]
+
+  RG_3:
+    Type: category
+    DataType: uint8[pyarrow]
+    Range: [ 10, 11, 12, 20, 21, 22, 30, 40, 50,
+             51, 52, 60, 70, 80, 81, 82, 90, 95 ]
+
+  RG_4:
+    Type: category
+    DataType: uint8[pyarrow]
+    Range: [ 10, 11, 12, 20, 21, 22, 30, 40, 50,
+             51, 52, 60, 70, 80, 81, 82, 90, 95 ]
+
+  RG_5:
+    Type: category
+    DataType: uint8[pyarrow]
+    Range: [ 10, 11, 12, 20, 21, 22, 30, 40, 50,
+             51, 52, 60, 70, 80, 81, 82, 90, 95 ]
+
+  RG_6:
+    Type: category
+    DataType: uint8[pyarrow]
+    Range: [ 10, 11, 12, 20, 21, 22, 30, 40, 50,
+             51, 52, 60, 70, 80, 81, 82, 90, 95 ]
+
+  RG_7:
+    Type: category
+    DataType: uint8[pyarrow]
+    Range: [ 10, 11, 12, 20, 21, 22, 30, 40, 50,
+             51, 52, 60, 70, 80, 81, 82, 90, 95 ]
+
+  RG_8:
+    Type: category
+    DataType: uint8[pyarrow]
+    Range: [ 10, 11, 12, 20, 21, 22, 30, 40, 50,
+             51, 52, 60, 70, 80, 81, 82, 90, 95 ]
+
+  RG_9:
+    Type: category
+    DataType: uint8[pyarrow]
+    Range: [ 10, 11, 12, 20, 21, 22, 30, 40, 50,
+             51, 52, 60, 70, 80, 81, 82, 90, 95 ]
+
+  RG_10:
+    Type: category
+    DataType: uint8[pyarrow]
+    Range: [ 10, 11, 12, 20, 21, 22, 30, 40, 50,
+             51, 52, 60, 70, 80, 81, 82, 90, 95 ]
+
+  RG_11:
+    Type: category
+    DataType: uint8[pyarrow]
+    Range: [ 10, 11, 12, 20, 21, 22, 30, 40, 50,
+             51, 52, 60, 70, 80, 81, 82, 90, 95 ]
+
+  RG_12:
+    Type: category
+    DataType: uint8[pyarrow]
+    Range: [ 10, 11, 12, 20, 21, 22, 30, 40, 50,
+             51, 52, 60, 70, 80, 81, 82, 90, 95 ]
+
+  RG_13:
+    Type: category
+    DataType: uint8[pyarrow]
+    Range: [ 10, 11, 12, 20, 21, 22, 30, 40, 50,
+             51, 52, 60, 70, 80, 81, 82, 90, 95 ]
+
+  RG_14:
+    Type: category
+    DataType: uint8[pyarrow]
+    Range: [ 10, 11, 12, 20, 21, 22, 30, 40, 50,
+             51, 52, 60, 70, 80, 81, 82, 90, 95 ]
+
+  RG_15:
+    Type: category
+    DataType: uint8[pyarrow]
+    Range: [ 10, 11, 12, 20, 21, 22, 30, 40, 50,
+             51, 52, 60, 70, 80, 81, 82, 90, 95 ]
+
+  RG_16:
+    Type: category
+    DataType: uint8[pyarrow]
+    Range: [ 10, 11, 12, 20, 21, 22, 30, 40, 50,
+             51, 52, 60, 70, 80, 81, 82, 90, 95 ]
+
+  RG_17:
+    Type: category
+    DataType: uint8[pyarrow]
+    Range: [ 10, 11, 12, 20, 21, 22, 30, 40, 50,
+             51, 52, 60, 70, 80, 81, 82, 90, 95 ]
+
+  RG_18:
+    Type: category
+    DataType: uint8[pyarrow]
+    Range: [ 10, 11, 12, 20, 21, 22, 30, 40, 50,
+             51, 52, 60, 70, 80, 81, 82, 90, 95 ]
+
+  RG_19:
+    Type: category
+    DataType: uint8[pyarrow]
+    Range: [ 10, 11, 12, 20, 21, 22, 30, 40, 50,
+             51, 52, 60, 70, 80, 81, 82, 90, 95 ]
+
+  RG_20:
+    Type: category
+    DataType: uint8[pyarrow]
+    Range: [ 10, 11, 12, 20, 21, 22, 30, 40, 50,
+             51, 52, 60, 70, 80, 81, 82, 90, 95 ]
+
+  RG_21:
+    Type: category
+    DataType: uint8[pyarrow]
+    Range: [ 10, 11, 12, 20, 21, 22, 30, 40, 50,
+             51, 52, 60, 70, 80, 81, 82, 90, 95 ]
+
+  RG_22:
+    Type: category
+    DataType: uint8[pyarrow]
+    Range: [ 10, 11, 12, 20, 21, 22, 30, 40, 50,
+             51, 52, 60, 70, 80, 81, 82, 90, 95 ]
+
+  RL080:
+    Name: REMOTE EDUCATION (OPTIONAL)
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 0
+      Max: 99
+    ApplicationLimit:
+      Target: RB082
+      Limit: 12
+      Operation: le
+
+  RX010:
+    Name: Age at the time of interview
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Extra: [ "Calculated", "Capped", "NotFlagged" ]
+    Range:
+      Min: 0
+      Max: 80
+
+  RX020:
+    Name: Age at the end of income reference period
+    Type: ordinal
+    DataType: int8[pyarrow]
+    Extra: [ "Calculated", "Capped", "NotFlagged" ]
+    Range:
+      Min: -1
+      Max: 80
+
+  RX030:
+    Name: Household identification number
+    Type: id
+    Extra: [ "Calculated", "NotFlagged" ]
+
+  RX040:
+    Name: Work intensity (new definition)
+    Type: ordinal
+    DataType: float16[pyarrow]
+    Extra: [ "Calculated", "NotFlagged" ]
+    Range:
+      Min: 0
+      Max: 99
+      # TODO think if you can improve this description
+    ApplicationLimit: # TODO this one is extremely complex
+
+  RX050:
+    Name: Low work intensity status (new definition) (0=no lwi, 1=lwi, 2=N/A)
+    Type: indicator
+    Extra: [ "Calculated", "NotFlagged" ]
+    ApplicationLimit: # TODO no explanation how to apply
+
+  RX060:
+    Name: Severely materially and socially deprived (0=not deprived, 1=deprived)
+    Type: indicator
+    Extra: [ "Calculated", "NotFlagged" ]
+    ApplicationLimit: # TODO no explanation how to apply
+
+  RX070:
+    Name: At risk of poverty or social exclusion (new definition) (1st digit= at risk of poverty, 2nd digit= Severely materially and socially deprived, 3rd digit= Low work intensity (0 when LWI in (0,2) 1 when LWI=1)
+    Type: category
+    Extra: [ "Calculated", "NotFlagged" ]
+    Range: [ 0, 100, 10, 110, 1, 101, 11, 111 ]
+    ApplicationLimit: # TODO no explanation how to apply
+    # TODO can we split it?
+
+#TODO deal with ids

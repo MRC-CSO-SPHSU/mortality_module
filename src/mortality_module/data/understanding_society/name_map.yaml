@@ -1,0 +1,308 @@
+# see also https://www.understandingsociety.ac.uk/documentation/mainstage/user-guides/main-survey-user-guide/imputation-flags-and-top-coding-of-income-variables
+
+# all ids are formed the same way id_%Target%
+
+# default target is person; id type is uint64
+
+# everything aside from benefits.vocations must have one value per target
+id:
+  hidp:
+    Target: household
+    File: indall, indresp, hhresp, youth, child, income
+  pidp:
+    Target: person
+    File: indall, indresp, youth, child, income, xwavedat
+
+  ppid:
+    Target: partner
+    File: indall, indresp
+  sppid:
+    Target: partner1
+    File: indall, indresp
+
+  fnspid:
+    Target: father
+    File: indall
+  fnpid:
+    Target: father1
+    File: indall
+
+  mnspid:
+    Target: mother
+    File: indall
+  mnpid:
+    Target: mother1
+    File: indall
+
+  pn1pid:
+    Target: parent1
+    File: indall
+  pn2pid:
+    Target: parent2
+    File: indall
+
+  grfpid:
+    Target: grandfather
+    File: indall
+  grmpid:
+    Target: grandmother
+    File: indall
+
+# TODO consider discretization of income and hours worked
+
+# default income is uint16 after rounding
+income:
+  fimnpen_dv:
+    Name: pension
+    File: indresp
+  fimnmisc_dv:
+    Name: miscellaneous
+    File: indresp
+  fimnsben_dv:
+    Name: benefits
+    File: indresp
+  fiyrinvinc_dv:
+    Name: investment
+    DataType: uint32
+    File: indresp
+  paygu_dv:
+    Name: pay
+    File: indresp
+  seearngrs_dv:
+    Name: self_employment
+    DataType: int16
+    File: indresp
+  j2pay_dv:
+    Name: second_job
+    File: indresp
+
+weight:
+  hhdenus_xw:
+    Target: household
+    File: hhresp
+
+# default type for ordinals is uint8
+ordinal:
+  istrtdaty:
+    Name: year
+    Target: household
+    File: indresp
+  age_dv:
+    Name: age
+    File: indall, indresp, youth, child
+  scghqa:
+    Name: ghq_a
+    File: indresp
+  scghqb:
+    Name: ghq_b
+    File: indresp
+  scghqc:
+    Name: ghq_c
+    File: indresp
+  scghqd:
+    Name: ghq_d
+    File: indresp
+  scghqe:
+    Name: ghq_e
+    File: indresp
+  scghqf:
+    Name: ghq_f
+    File: indresp
+  scghqg:
+    Name: ghq_g
+    File: indresp
+  scghqh:
+    Name: ghq_h
+    File: indresp
+  scghqi:
+    Name: ghq_i
+    File: indresp
+  scghqj:
+    Name: ghq_j
+    File: indresp
+  scghqk:
+    Name: ghq_k
+    File: indresp
+  scghql:
+    Name: ghq_l
+    File: indresp
+  sf1:
+    Name: sf_1
+    File: indresp
+  sf2a:
+    Name: sf_2a
+    File: indresp
+  sf2b:
+    Name: sf_2b
+    File: indresp
+  sf3a:
+    Name: sf_3a
+    File: indresp
+  sf3b:
+    Name: sf_3b
+    File: indresp
+  sf4a:
+    Name: sf_4a
+    File: indresp
+  sf4b:
+    Name: sf_4b
+    File: indresp
+  sf5:
+    Name: sf_5
+    File: indresp
+  sf6a:
+    Name: sf_6a
+    File: indresp
+  sf6b:
+    Name: sf_6b
+    File: indresp
+  sf6c:
+    Name: sf_6c
+    File: indresp
+  sf7:
+    Name: sf_7
+    File: indresp
+  finnow:
+    Name: financial_situation
+    File: indresp
+  sclfsato:
+    Name: life_satisfaction
+    File: indresp
+  ncars:
+    Name: total_cars
+    Target: household
+    File: hhresp
+
+category:
+  jbstat:
+    Name: job_status
+    File: indresp
+  jbnssec_dv:
+    Name: job_nssec
+    File: indresp
+  jbiindb_dv:
+    Name: job_sic
+    File: indresp
+  marstat:
+    Name: legal_marital_status
+    File: indall, indresp
+  qfhigh:
+    Name: full_highest_qualification
+    File: indresp
+  # we don't use coarse qualification since is a derived variable
+  # see https://www.understandingsociety.ac.uk/wp-content/uploads/documentation/main-survey/variables/look_up-table-hiqual_dv.pdf
+  maedqf:
+    Name: mother_education
+    File: indresp, xwavedat
+  paedqf:
+    Name: father_education
+    File: indresp, xwavedat
+  hsownd:
+    Name: house_ownership
+    Target: household
+    File: hhresp
+  ethn_dv:
+    Name: ethnic_group
+    File: indall
+  gor_dv:
+    Name: location
+    Target: household
+    File: hhresp
+  scflag_dv:
+    Name: self_completion
+    File: indall
+  ivfio:
+    Name: individual_interview_outcome
+    File: indall
+  ioutcome:
+    Name: final_computed_outcome
+    File: indall
+
+# a set of indicator columns
+multilabel:
+  ficode:
+    Name: benefit_income_source
+    File: income
+
+# regular indicators or variables that will be represented as such
+indicator:
+  #depchl_dv:
+  #  Name: is_dependent_child
+  #  File: indall, indresp, child
+  sex:
+    Name: sex
+    File: indall, indresp, youth, child
+  jbhas:
+    Name: did_paid_work
+    File: indresp
+  jboff:
+    Name: has_job_no_work
+    File: indresp
+  jbsemp:
+    Name: is_employed_self_employed
+    File: indresp
+  qfvoc1: #TODO mlb?
+    Name: vocational_qualification_1
+    File: indresp
+  qfvoc2:
+    Name: vocational_qualification_2
+    File: indresp
+  qfvoc3:
+    Name: vocational_qualification_3
+    File: indresp
+  qfvoc4:
+    Name: vocational_qualification_4
+    File: indresp
+  qfvoc5:
+    Name: vocational_qualification_5
+    File: indresp
+  qfvoc6:
+    Name: vocational_qualification_6
+    File: indresp
+  qfvoc7:
+    Name: vocational_qualification_7
+    File: indresp
+  qfvoc8:
+    Name: vocational_qualification_8
+    File: indresp
+  qfvoc9:
+    Name: vocational_qualification_9
+    File: indresp
+  qfvoc10:
+    Name: vocational_qualification_10
+    File: indresp
+  qfvoc11:
+    Name: vocational_qualification_11
+    File: indresp
+  qfvoc12:
+    Name: vocational_qualification_12
+    File: indresp
+  qfvoc13:
+    Name: vocational_qualification_13
+    File: indresp
+  qfvoc14:
+    Name: vocational_qualification_14
+    File: indresp
+  qfvoc15:
+    Name: vocational_qualification_15
+    File: indresp
+  qfvoc96:
+    Name: vocational_qualification_96
+    File: indresp
+  heatch:
+    Name: has_central_heating
+    Target: household
+    File: hhresp
+
+# default target is week
+# TODO select default transformation and dtype
+hours:
+  jbot:
+    Name: overtime
+    File: indresp
+  jbhrs:
+    Name: employment
+    File: indresp
+  jshrs:
+    Name: self_employment
+    File: indresp

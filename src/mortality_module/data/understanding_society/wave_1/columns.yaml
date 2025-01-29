@@ -1,0 +1,114 @@
+indall:
+  absent:
+    Label: whether there is anyone else who normally lives here but is away at the moment
+    Type: indicator
+
+  absflag:
+    Label: Flag for whether or not there is someone else in the household who is away at the moment or someone who is away at school/college/university and living in halls of residence/boarding school.
+    Type: indicator
+    # TODO check this one
+
+  absreason:
+    Label: reason member is absent
+    Type: category
+    DataType: int8[pyarrow]
+
+  adresp15:
+    Label: Person number of the adult responsible for a child aged 15 or under. This is derived from unedited information in the household grid.
+    Type: id
+
+  adresp15_dv:
+    Label: "Person number of person responsible for child under 16. In most cases the biological mother is considered the responsible adult. If she is not present in the household, the following others are assigned the role in that priority order: biological father, step or adoptive mother, step or adoptive father, grandmother, grandfather, foster mother, foster father. In some cases, none of the above others are present. In this case the variable assumes the code recorded in the household grid during the interview."
+    Type: id
+    #Extra: ["Derived"]
+
+  adresp17:
+    Label: Person number of the adult responsible for a child aged 17 or under. This is derived from unedited information in the household grid.
+    Type: id
+
+  age_dv:
+    Label: "Age, in completed years, at the time of interview. Calculated from the date of birth held in the sample administration database and the interview date. This is conceptually different from dvage which measures the age at the time eligibility for the interview is determined (typically at the time of household enumeration). Uses current and previous wave values of dvage to compute doby_dv where missing. Recorded to missing sample members whose interview outcome is inconsistent with the suggested age +/- one year. DOB month DOBM_DV is made available in UKDS SN6931 only. DOB day (DOBD_DV) is made available in UKDS SN6676 only. "
+    Type: ordinal
+    #Extra: ["Flagged", "Derived"]
+
+  age_if:
+    Label: Age in completed years at the time of interview. Assumes a value of [1] if either the date of interview or the date of birth derived variables relied on imputed values.
+    Type: indicator
+
+  ageest:
+    Label: "estimate: age of member"
+    Type: ordinal
+
+  agegr10_dv:
+    Label: Age group in 10-year intervals, as seen on the UK Labour Force Survey. The age group of children with unknown age is determined on the basis of the interview outcome code “child under 10” and by whether or not an adult in the household is the responsible adult of the person.
+    Type: indicator
+
+  agegr13_dv:
+    Label: Age group in 13 categories, as seen on the UK Labour Force Survey. The age group of children with unknown age is determined on the basis of the interview outcome code “child under 10” and by whether or not an adult in the household is the responsible adult of the person.
+    Type: indicator
+
+  agegr5_dv:
+    Label: Age group in 5-year intervals, as seen on the UK Labour Force Survey.
+    Type: ordinal
+
+  ageif:
+    Label: age last birthday
+    Type: ordinal
+
+  birthy:
+    Label: year of birth
+    Type: ordinal
+
+  buno_dv:
+    Label: This distinguishes the separate benefit unit to which an individual belongs. Benefit units are subsets of households, consisting of single individuals or couples, and their dependent children, if any. Assumes the value of the person number of the first member of that benefit unit in sequential order of person numbers. Missing if there are missing data on input variables, and the benefit unit cannot be inferred. See buno_dv_public.do for the do file.
+    Type: id
+
+  cohab_dv:
+    Label: Flag for whether or not enumerated person lives with a partner in the household. See cohab_dv_public.do for the do file.
+    Type: indicator
+
+  country:
+    Label: Country of residence
+    Type: category
+
+  depchl_dv:
+    Label: A dependent child is defined as one aged under 16 or aged 16-18 and in school or non-advanced further education, not married and living with parent. If an individual aged 16-18 and in full time education did not receive an interview (to determine their educational status), they were assumed to be dependent children. It does not include any children who have a spouse, partner or child living in the household. See depchl_dv_public.do for the do file.
+    Type: indicator
+
+  doby_dv:
+    Label: Date of birth, year. Taken from the sample member’s latest enumeration in the study. Not defined for BHPS wave 1-18 respondents who were never enumerated in the UKHLS. Recorded to missing for sample members whose interview outcome is inconsistent with the suggested age +/- one year.
+    Type: ordinal
+
+  doby_if:
+    Label: DOB Year imputation flag
+    Type: indicator
+
+  dvage:
+    Label: The age of the respondent at last birthday. This is derived from the exact date of birth and the date of the interview. Where the date of birth information is missing, the estimated age is used. In Wave 6, the information is edited post-field to incorporate cross-wave checked information collected elsewhere (e.g., later in the interview, in an earlier interview, or in an interview with another member of the household). First, DOB information from the individual interview in Wave 6 is used. If missing, the confirmed DOB information on the INDALL data file is used. If missing, additional sources from previous interviews are used. The age is computed from the DOB and the date of interview (i.e., the date the household grid was completed). For a small number of cases with no DOB information, the original age variable is used.
+    Type: ordinal
+
+  emboost:
+    Label: "Flag to indicate Ethnic Minority boost sample member. Assumes a value of [1] for original sample members in the Ethnic Minority Boost sample and all household members co-resident at the current wave, [0] otherwise. For more details, see Berthoud, R. et al (2009): The Design of the Understanding Society ethnic minority boost sample, Understanding Society Working Paper 2009-02. "
+    Type: indicator
+
+  employ:
+    Label: in paid employment
+    Type: indicator
+
+  ethn_dv:
+    Label: Ethnic group derived from multiple sources (self-reported as an adult, self-reported as a youth, reported by a household member, ethnic group of biological parents), with priority given to self-reported information.
+    Type: category
+
+  ethnic1:
+    Label: indian
+    Type: indicator
+
+  ethnic10:
+    Label: african asian
+    Type: indicator
+
+  ethnic11:
+    Label: chinese
+    Type: indicator
+
+

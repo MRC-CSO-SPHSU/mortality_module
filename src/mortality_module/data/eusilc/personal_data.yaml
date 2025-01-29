@@ -1,0 +1,1150 @@
+Year: 2022
+MetadataVersion: 7
+Values:
+
+  PB010:
+    Name: YEAR OF THE SURVEY
+    Type: ordinal
+    DataType: uint16[pyarrow]
+    Extra: [ "NotFlagged" ]
+    Range: 2022
+
+  PB020:
+    Name: COUNTRY OF RESIDENCE
+    Type: category
+    DataType: str
+    Extra: [ "NotFlagged" ]
+    Range: [ "be", "bg", "cz", "dk", "de", "ee", "ie", "el", "es", "fr", "hr",
+             "it", "cy", "lv", "lt", "lu", "hu", "mt", "nl", "at", "pl", "pt",
+             "ro", "si", "sk", "fi", "se", "uk", "ch", "is", "no", "me", "mk",
+             "rs", "tr", "al", "xk" ]
+
+  PB030:
+    Name: PERSONAL ID
+    Type: id
+    Extra: [ "NotFlagged" ]
+    Range:
+      Min: None #TODO
+      Max: None
+
+  PB040:
+    Name: PERSONAL CROSS-SECTIONAL WEIGHT [ALL HOUSEHOLD MEMBERS AGED 16 AND OVER]
+    Type: weight
+
+  PB050:
+    Name: PERSONAL BASE WEIGHT [ALL HOUSEHOLD MEMBERS AGED 16 AND OVER]
+    Type: weight
+
+  PB060:
+    Name: PERSONAL CROSS-SECTIONAL WEIGHT FOR SELECTED RESPONDENT
+    Type: weight
+
+  PB070:
+    Name: PERSONAL DESIGN WEIGHT FOR SELECTED RESPONDENT
+    Type: weight
+    Extra: [ "NotDisseminated" ]
+
+  PB080:
+    Name: PERSONAL BASE WEIGHT FOR SELECTED RESPONDENT
+    Type: weight
+
+  PB090:
+    Name: DAY OF THE PERSONAL INTERVIEW
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Extra: [ "NotDisseminated" ]
+    Range:
+      Min: 1
+      Max: 31
+
+  PB100:
+    Name: MONTH OF THE PERSONAL INTERVIEW
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Extra: ["Recoded"]
+    Range:
+      Min: 1
+      Max: 12
+
+  PB110:
+    Name: YEAR OF THE PERSONAL INTERVIEW
+    Type: ordinal
+    DataType: uint16[pyarrow]
+    Range: 2022
+
+  PB120:
+    Name: MINUTES TO COMPLETE THE PERSONAL QUESTIONNAIRE
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 90
+
+  PB140:
+    Name: YEAR OF BIRTH
+    Type: ordinal
+    DataType: uint16[pyarrow]
+    Extra: ["Capped"]
+    Range:
+      Min: 1900
+      Max: 2022
+
+  PB150:
+    Name: SEX
+    Type: indicator
+
+  PB160:
+    Name: FATHER ID
+    Type: id
+
+  PB170:
+    Name: MOTHER ID
+    Type: id
+
+  PB180:
+    Name: SPOUSE/PARTNER ID
+    Type: id
+
+  PB190:
+    Name: MARITAL STATUS
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 5
+
+  PB200:
+    Name: CONSENSUAL UNION
+    Type: category
+    DataType: uint8[pyarrow]
+    Extra: [ "Splittable" ]
+    Range:
+      Min: 1
+      Max: 3
+
+  PB205:
+    Name: PARTNERS LIVING IN THE SAME HOUSEHOLD
+    Type: indicator
+
+  PB230:
+    Name: COUNTRY OF BIRTH OF FATHER
+    Type: category
+    DataType: str
+    Extra: ["Recoded"]
+    Range:
+      Min: None #TODO
+      Max: None
+
+  PB240:
+    Name: COUNTRY OF BIRTH OF MOTHER
+    Type: category
+    DataType: str
+    Extra: ["Recoded"]
+    Range:
+      Min: None #TODO
+      Max: None
+
+  PB260:
+    Name: NATURE OF PARTICIPATION IN THE SURVEY
+    Type: indicator
+    Extra: [ "NotDisseminated" ]
+
+  PB265:
+    Name: PERSONAL ID OF PERSON WHO FILLED IN THE INDIVIDUAL QUESTIONNAIRE
+    Type: id
+    Extra: [ "NotDisseminated" ]
+
+  PB270:
+    Name: INTERVIEWING MODE USED (PERSON)
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 5
+
+  PE010:
+    Name: PARTICIPATION IN FORMAL EDUCATION AND TRAINING (STUDENT OR APPRENTICE)
+    Type: indicator
+
+  PE021:
+    Name: LEVEL OF CURRENT/MOST RECENT FORMAL EDUCATION OR TRAINING ACTIVITY
+    Type: category
+    DataType: uint8[pyarrow]
+    Extra: ["Capped"]
+    Range: [ 00, 10, 20, 30, 34, 35, 39, 40, 44, 45, 49, 50, 54, 55, 59, 60, 70 ]
+
+  PE041:
+    Name: EDUCATIONAL ATTAINMENT LEVEL
+    Type: category
+    DataType: uint16[pyarrow]
+    Extra: ["Capped"]
+    Range: [ 000, 100, 200, 340, 342, 343, 344, 349, 350, 352, 353, 354, 359, 390, 392, 393, 394, 399, 440, 450, 490, 540, 550, 590, 600, 700, 800 ]
+
+  PH010:
+    Name: SELF-PERCEIVED GENERAL HEALTH
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 5
+
+  PH020:
+    Name: SUFFER FROM ANY CHRONIC [LONG-STANDING] ILLNESS OR CONDITION
+    Type: indicator
+
+  PH030:
+    Name: LIMITATION IN ACTIVITIES BECAUSE OF HEALTH PROBLEMS
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 3
+
+  PH040:
+    Name: UNMET NEED FOR MEDICAL EXAMINATION OR TREATMENT
+    Type: indicator
+
+  PH050:
+    Name: MAIN REASON FOR UNMET NEED FOR MEDICAL EXAMINATION OR TREATMENT
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 8
+
+  PH060:
+    Name: UNMET NEED FOR DENTAL EXAMINATION OR TREATMENT
+    Type: indicator
+
+  PH070:
+    Name: MAIN REASON FOR UNMET NEED FOR DENTAL EXAMINATION OR TREATMENT
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 8
+
+  PD020:
+    Name: REPLACE WORN-OUT CLOTHES BY SOME NEW (NOT SECOND-HAND) ONES
+    Type: category
+    DataType: uint8[pyarrow]
+    Extra: [ "Splittable" ]
+    Range:
+      Min: 1
+      Max: 3
+
+  PD030:
+    Name: TWO PAIRS OF PROPERLY FITTING SHOES [INCLUDING A PAIR OF ALL-WEATHER SHOES]
+    Type: category
+    DataType: uint8[pyarrow]
+    Extra: [ "Splittable" ]
+    Range:
+      Min: 1
+      Max: 3
+
+  PD050:
+    Name: GET-TOGETHER WITH FRIENDS/FAMILY [RELATIVES] FOR A DRINK/MEAL AT LEAST ONCE A MONTH
+    Type: category
+    DataType: uint8[pyarrow]
+    Extra: [ "Splittable" ]
+    Range:
+      Min: 1
+      Max: 3
+
+  PD060:
+    Name: REGULARLY PARTICIPATE IN A LEISURE ACTIVITY
+    Type: category
+    DataType: uint8[pyarrow]
+    Extra: [ "Splittable" ]
+    Range:
+      Min: 1
+      Max: 3
+
+  PD070:
+    Name: SPEND A SMALL AMOUNT OF MONEY EACH WEEK ON YOURSELF
+    Type: category
+    DataType: uint8[pyarrow]
+    Extra: [ "Splittable" ]
+    Range:
+      Min: 1
+      Max: 3
+
+  PD080:
+    Name: INTERNET CONNECTION FOR PERSONAL USE AT HOME
+    Type: category
+    DataType: uint8[pyarrow]
+    Extra: [ "Splittable" ]
+    Range:
+      Min: 1
+      Max: 3
+
+  PW010:
+    Name: OVERALL LIFE SATISFACTION
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 0
+      Max: 10
+
+  PW191:
+    Name: TRUST IN OTHERS
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 0
+      Max: 10
+
+  PL016:
+    Name: EXISTENCE OF PREVIOUS EMPLOYMENT EXPERIENCE
+    Type: category
+    DataType: uint8[pyarrow]
+    Extra: [ "Splittable" ]
+    Range:
+      Min: 1
+      Max: 3
+
+  PL032:
+    Name: SELF-DEFINED CURRENT ECONOMIC STATUS
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 8
+
+  PL040A:
+    Name: STATUS IN EMPLOYMENT (MAIN JOB)
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 4
+
+  PL040B:
+    Name: STATUS IN EMPLOYMENT (LAST JOB)
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 4
+
+  PL051A:
+    Name: OCCUPATION IN MAIN JOB
+    Type: category # TODO extract major groups
+    DataType: uint8[pyarrow]
+    Range: [ 11, 12, 13, 14, 21, 22, 23, 24, 25, 26, 31, 32, 33, 34, 35, 41, 42,
+             43, 44, 51, 52, 53, 54, 61, 62, 63, 71, 72, 73, 74, 75, 81, 82, 83,
+             91, 92, 93, 94, 95, 96, 01, 02, 03 ]
+
+  PL051B:
+    Name: OCCUPATION (LAST JOB)
+    Type: category # TODO extract major groups
+    DataType: uint8[pyarrow]
+    Range: [ 11, 12, 13, 14, 21, 22, 23, 24, 25, 26, 31, 32, 33, 34, 35, 41, 42,
+             43, 44, 51, 52, 53, 54, 61, 62, 63, 71, 72, 73, 74, 75, 81, 82, 83,
+             91, 92, 93, 94, 95, 96, 01, 02, 03 ]
+
+  PL060:
+    Name: NUMBER OF HOURS USUALLY WORKED PER WEEK IN THE MAIN JOB
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 99
+
+  PL073:
+    Name: NUMBER OF MONTHS SPENT IN FULL-TIME WORK AS EMPLOYEE
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 0
+      Max: 12
+
+  PL074:
+    Name: NUMBER OF MONTHS SPENT IN PART-TIME WORK AS EMPLOYEE
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 0
+      Max: 12
+
+  PL075:
+    Name: NUMBER OF MONTHS SPENT IN FULL-TIME WORK AS SELF-EMPLOYED [INCLUDING FAMILY WORKER]
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 0
+      Max: 12
+
+  PL076:
+    Name: NUMBER OF MONTHS SPENT IN PART-TIME WORK AS SELF-EMPLOYED [INCLUDING FAMILY WORKER]
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 0
+      Max: 12
+
+  PL080:
+    Name: NUMBER OF MONTHS SPENT IN UNEMPLOYMENT
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 0
+      Max: 12
+
+  PL085:
+    Name: NUMBER OF MONTHS SPENT IN RETIREMENT
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 0
+      Max: 12
+
+  PL086:
+    Name: NUMBER OF MONTHS UNABLE TO WORK DUE TO LONG-STANDING HEALTH PROBLEMS
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 0
+      Max: 12
+
+  PL087:
+    Name: NUMBER OF MONTHS SPENT STUDYING
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 0
+      Max: 12
+
+  PL088:
+    Name: NUMBER OF MONTHS SPENT IN COMPULSORY MILITARY SERVICE
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 0
+      Max: 12
+
+  PL089:
+    Name: NUMBER OF MONTHS SPENT FULFILLING DOMESTIC TASKS
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 0
+      Max: 12
+
+  PL090:
+    Name: NUMBER OF MONTHS SPENT IN OTHER INACTIVITY
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 0
+      Max: 12
+
+  PL100:
+    Name: TOTAL NUMBER OF HOURS PER WEEK USUALLY WORKED IN THE SECOND, THIRD,..JOBS
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 99
+
+  PL111A:
+    Name: ECONOMIC ACTIVITY OF THE LOCAL UNIT FOR THE MAIN JOB
+    Type: category # todo extract major groups
+    DataType: uint8[pyarrow]
+    Extra: ["Recoded"]
+    Range: [ 01, 02, 03, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+             19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 35, 36,
+             37, 38, 39, 41, 42, 43, 45, 46, 47, 49, 50, 51, 52, 53, 55, 56, 58,
+             59, 60, 61, 62, 63, 64, 65, 66, 68, 69, 70, 71, 72, 73, 74, 75, 77,
+             78, 79, 80, 81, 82, 84, 85, 86, 87, 88, 90, 91, 92, 93, 94, 95, 96,
+             97, 98, 99 ]
+
+  PL111B:
+    Name: ECONOMIC ACTIVITY OF THE LOCAL UNIT (LAST JOB)
+    Type: category # todo extract major groups
+    DataType: uint8[pyarrow]
+    Extra: ["Recoded"]
+    Range: [ 01, 02, 03, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+             19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 35, 36,
+             37, 38, 39, 41, 42, 43, 45, 46, 47, 49, 50, 51, 52, 53, 55, 56, 58,
+             59, 60, 61, 62, 63, 64, 65, 66, 68, 69, 70, 71, 72, 73, 74, 75, 77,
+             78, 79, 80, 81, 82, 84, 85, 86, 87, 88, 90, 91, 92, 93, 94, 95, 96,
+             97, 98, 99 ]
+
+  PL141:
+    Name: PERMANENCY OF MAIN JOB
+    Type: category
+    DataType: uint8[pyarrow]
+    Extra: [ "Splittable" ]
+    Range: [ 11, 12, 21, 22 ]
+
+  PL145:
+    Name: FULL OR PART-TIME MAIN JOB (SELF-DEFINED)
+    Type: indicator
+
+  PL150:
+    Name: SUPERVISORY RESPONSIBILITY IN THE MAIN JOB
+    Type: indicator
+
+  PL200:
+    Name: NUMBER OF YEARS SPENT IN PAID WORK [AS EMPLOYEE OR SELF-EMPLOYED]
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 0
+      Max: 65
+
+  PL211A:
+    Name: MAIN ACTIVITY IN JANUARY
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 11
+
+  PL211B:
+    Name: MAIN ACTIVITY IN FEBRUARY
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 11
+
+  PL211C:
+    Name: MAIN ACTIVITY IN MARCH
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 11
+
+  PL211D:
+    Name: MAIN ACTIVITY IN APRIL
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 11
+
+  PL211E:
+    Name: MAIN ACTIVITY IN MAY
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 11
+
+  PL211F:
+    Name: MAIN ACTIVITY IN JUNE
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 11
+
+  PL211G:
+    Name: MAIN ACTIVITY IN JULY
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 11
+
+  PL211H:
+    Name: MAIN ACTIVITY IN AUGUST
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 11
+
+  PL211I:
+    Name: MAIN ACTIVITY IN SEPTEMBER
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 11
+
+  PL211J:
+    Name: MAIN ACTIVITY IN OCTOBER
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 11
+
+  PL211K:
+    Name: MAIN ACTIVITY IN NOVEMBER
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 11
+
+  PL211L:
+    Name: MAIN ACTIVITY IN DECEMBER
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 11
+
+  PL271:
+    Name: DURATION OF THE MOST RECENT UNEMPLOYMENT SPELL
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 0
+      Max: 99
+      # TODO this one is different in terms of application range
+
+  PY010G:
+    Name: EMPLOYEE CASH OR NEAR CASH INCOME
+    Type: income
+
+  PY010N:
+    Name: EMPLOYEE CASH OR NEAR CASH INCOME
+    Type: income
+
+  PY020G:
+    Name: NON-CASH EMPLOYEE INCOME
+    Type: income
+
+  PY020N:
+    Name: NON-CASH EMPLOYEE INCOME
+    Type: income
+
+  PY021G:
+    Name: COMPANY CAR
+    Type: income
+
+  PY021N:
+    Name: COMPANY CAR
+    Type: income
+
+  PY030G:
+    Name: EMPLOYER’S SOCIAL INSURANCE CONTRIBUTION
+    Type: income
+
+  PY035G:
+    Name: CONTRIBUTIONS TO INDIVIDUAL PRIVATE PENSION PLANS
+    Type: income
+
+  PY035N:
+    Name: CONTRIBUTIONS TO INDIVIDUAL PRIVATE PENSION PLANS
+    Type: income
+
+  PY050G:
+    Name: CASH BENEFITS OR LOSSES FROM SELF-EMPLOYMENT
+    Type: income
+    Range:
+      Min: -999999.99
+
+  PY050N:
+    Name: CASH BENEFITS OR LOSSES FROM SELF-EMPLOYMENT
+    Type: income
+    Range:
+      Min: -999999.99
+
+  PY080G:
+    Name: PENSION FROM INDIVIDUAL PRIVATE PLANS
+    Type: income
+
+  PY080N:
+    Name: PENSION FROM INDIVIDUAL PRIVATE PLANS
+    Type: income
+
+  PY090G:
+    Name: UNEMPLOYMENT BENEFITS
+    Type: income
+
+  PY090N:
+    Name: UNEMPLOYMENT BENEFITS
+    Type: income
+
+  PY091G:
+    Name: UNEMPLOYMENT BENEFITS [CONTRIBUTORY AND MEANS TESTED]
+    Type: income
+
+  PY092G:
+    Name: UNEMPLOYMENT BENEFITS [CONTRIBUTORY AND NON-MEANS-TESTED]
+    Type: income
+
+  PY093G:
+    Name: UNEMPLOYMENT BENEFITS [NON-CONTRIBUTORY AND MEANS TESTED]
+    Type: income
+
+  PY094G:
+    Name: UNEMPLOYMENT BENEFITS [NON-CONTRIBUTORY AND NON-MEANS-TESTED]
+    Type: income
+
+  PY100G:
+    Name: OLD-AGE BENEFITS
+    Type: income
+
+  PY100N:
+    Name: OLD-AGE BENEFITS
+    Type: income
+
+  PY101G:
+    Name: OLD-AGE BENEFITS (CONTRIBUTORY AND MEANS-TESTED)
+    Type: income
+
+  PY102G:
+    Name: OLD-AGE BENEFITS (CONTRIBUTORY AND NON MEANS-TESTED)
+    Type: income
+
+  PY103G:
+    Name: OLD-AGE BENEFITS (NON-CONTRIBUTORY AND MEANS-TESTED)
+    Type: income
+
+  PY104G:
+    Name: OLD-AGE BENEFITS (NON-CONTRIBUTORY AND NON MEANS-TESTED)
+    Type: income
+
+  PY110G:
+    Name: SURVIVOR’S BENEFITS
+    Type: income
+
+  PY110N:
+    Name: SURVIVOR’S BENEFITS
+    Type: income
+
+  PY111G:
+    Name: SURVIVOR’S BENEFITS [CONTRIBUTORY AND MEANS-TESTED]
+    Type: income
+
+  PY112G:
+    Name: SURVIVOR’S BENEFITS [CONTRIBUTORY AND NON-MEANS-TESTED]
+    Type: income
+
+  PY113G:
+    Name: SURVIVOR’S BENEFITS [NON-CONTRIBUTORY AND MEANS-TESTED]
+    Type: income
+
+  PY114G:
+    Name: SURVIVOR’S BENEFITS [NON-CONTRIBUTORY AND NON-MEANS-TESTED]
+    Type: income
+
+  PY120G:
+    Name: SICKENESS BENEFITS
+    Type: income
+
+  PY120N:
+    Name: SICKENESS BENEFITS
+    Type: income
+
+  PY121G:
+    Name: SICKNESS BENEFITS [CONTRIBUTORY AND MEANS-TESTED]
+    Type: income
+
+  PY122G:
+    Name: SICKNESS BENEFITS [CONTRIBUTORY AND NON-MEANS-TESTED]
+    Type: income
+
+  PY123G:
+    Name: SICKNESS BENEFITS [NON-CONTRIBUTORY AND MEANS-TESTED]
+    Type: income
+
+  PY124G:
+    Name: SICKNESS BENEFITS [NON-CONTRIBUTORY AND NON-MEANS-TESTED]
+    Type: income
+
+  PY130G:
+    Name: DISABILITY BENEFITS
+    Type: income
+
+  PY130N:
+    Name: DISABILITY BENEFITS
+    Type: income
+
+  PY131G:
+    Name: DISABILITY BENEFITS [CONTRIBUTORY AND MEANS-TESTED]
+    Type: income
+
+  PY132G:
+    Name: DISABILITY BENEFITS [CONTRIBUTORY AND NON-MEANS-TESTED]
+    Type: income
+
+  PY133G:
+    Name: DISABILITY BENEFITS [NON-CONTRIBUTORY AND MEANS-TESTED]
+    Type: income
+
+  PY134G:
+    Name: DISABILITY BENEFITS [NON-CONTRIBUTORY AND NON-MEANS-TESTED]
+    Type: income
+
+  PY140G:
+    Name: EDUCATION RELATED ALLOWANCES
+    Type: income
+
+  PY140N:
+    Name: EDUCATION RELATED ALLOWANCES
+    Type: income
+
+  PY141G:
+    Name: EDUCATION-RELATED ALLOWANCES [CONTRIBUTORY AND MEANS-TESTED]
+    Type: income
+
+  PY142G:
+    Name: EDUCATION-RELATED ALLOWANCES [CONTRIBUTORY AND NON-MEANS-TESTED]
+    Type: income
+
+  PY143G:
+    Name: EDUCATION-RELATED ALLOWANCES [NON-CONTRIBUTORY AND MEANS-TESTED]
+    Type: income
+
+  PY144G:
+    Name: EDUCATION-RELATED ALLOWANCES [NON-CONTRIBUTORY AND NON-MEANS-TESTED]
+    Type: income
+
+  PH080:
+    Name: NUMBER OF CONSULTATIONS OF A DENTIST OR ORTHODONTIST OR OTHER DENTAL CARE SPECIALISTS IN THE LAST 12 MONTHS
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 5
+
+  PH090:
+    Name: NUMBER OF CONSULTATIONS WITH OF A GENERAL PRACTITIONER OR FAMILY DOCTOR IN THE PAST 12 MONTHS
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 5
+
+  PH100:
+    Name: NUMBER OF CONSULTATIONS OF A MEDICAL OR SURGICAL SPECIALIST (EXCLUDING DENTISTS, ORTHODONTISTS OR OTHER DENTAL CARE SPECIALISTS) IN THE PAST 12 MONTHS
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 5
+
+  PH110A:
+    Name: BMI 1 WEIGHT
+    Type: ordinal
+    DataType: uint16[pyarrow] # TODO is it a suitable type?
+    Range:
+      Min: 20
+      Max: 350
+
+  PH110B:
+    Name: BMI2 HEIGHT
+    Type: ordinal
+    DataType: uint8[pyarrow] # TODO is it a suitable type, not float?
+    Range:
+      Min: 50
+      Max: 250
+
+  PH122:
+    Name: TYPE OF PHYSICAL ACTIVITY WHEN WORKING
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 4
+
+  PH132:
+    Name: FREQUENCY OF PHYSICAL ACTIVITIES (EXCLUDING WORKING)
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 6
+
+  PH142:
+    Name: FREQUENCY OF EATING FRUIT (EXCLUDING ANY JUICE)
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 6
+
+  PH152:
+    Name: FREQUENCY OF EATING VEGETABLES OR SALAD (EXCLUDING JUICE)
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 6
+
+  PH171:
+    Name: FREQUENCY OF TOBACCO USE (INCLUDING ELECTRONIC CIGARETTES OR SIMILAR ELECTRONIC DEVICES)
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 5
+
+  PH180:
+    Name: FREQUENCY OF CONSUMPTION OF AN ALCOHOLIC DRINK OF ANY KIND
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 5
+
+  PH101:
+    Name: DIFFICULTY IN SEEING, EVEN WHEN WEARING GLASSES OR CONTACT LENSES
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 4
+
+  PH111:
+    Name: DIFFICULTY IN HEARING, EVEN WHEN USING A HEARING AID
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 4
+
+  PH121:
+    Name: DIFFICULTY IN WALKING OR CLIMBING STEPS
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 4
+
+  PH131:
+    Name: DIFFICULTY IN REMEMBERING OR CONCENTRATING
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 4
+
+  PH141:
+    Name: DIFFICULTY (WITH SELF-CARE SUCH AS) WASHING ALL OVER OR DRESSING
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 4
+
+  PH151:
+    Name: DIFFICULTY IN COMMUNICATING (USING USUAL LANGUAGE, FOR EXAMPLE UNDERSTANDING OR BEING UNDERSTOOD BY OTHERS)
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 4
+
+  PW241:
+    Name: FEELING LEFT OUT
+    Type: category # todo convert to ordinal
+    DataType: uint8[pyarrow]
+    Range: [1, 2, 3, 4, 5, 99]
+
+  PW030:
+    Name: SATISFACTION WITH FINANCIAL SITUATION
+    Type: category # todo convert to ordinal
+    DataType: uint8[pyarrow]
+    Range: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 99 ]
+
+  PW160:
+    Name: SATISFACTION WITH PERSONAL RELATIONSHIPS
+    Type: category # todo convert to ordinal
+    DataType: uint8[pyarrow]
+    Range: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 99 ]
+
+  PW120:
+    Name: SATISFACTION WITH TIME USE (AMOUNT OF LEISURE TIME)
+    Type: category # todo convert to ordinal
+    DataType: uint8[pyarrow]
+    Range: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 99 ]
+
+  PW230:
+    Name: FEELING LONELY
+    Type: category # todo convert to ordinal
+    DataType: uint8[pyarrow]
+    Range: [ 1, 2, 3, 4, 5, 99 ]
+
+  PW090:
+    Name: BEING HAPPY
+    Type: category # todo convert to ordinal
+    DataType: uint8[pyarrow]
+    Range: [ 1, 2, 3, 4, 5, 99 ]
+
+  PW180:
+    Name: HELP FROM OTHERS
+    Type: indicator
+
+  PW005:
+    Name: MODULE ON WELL-BEING WEIGHT
+    Type: weight
+
+  PS010:
+    Name: NUMBER OF TIMES GOING TO THE CINEMA
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 8
+
+  PS020:
+    Name: NUMBER OF TIMES GOING TO LIVE PERFORMANCES (PLAYS, CONCERTS, OPERAS, BALLET AND DANCE PERFORMANCES)
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 7
+
+  PS030:
+    Name: NUMBER OF VISITS TO CULTURAL SITES
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 7
+
+  PS040:
+    Name: NUMBER OF TIMES ATTENDING LIVE SPORT EVENTS
+    Type: category
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 8
+
+  PS041:
+    Name: ARTISTIC ACTIVITIES
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 6
+
+  PS042:
+    Name: READING BOOKS (INCLUDING E-BOOKS OR AUDIO BOOKS, DURING YEAR)
+    Type: category # todo splittable?
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 8
+
+  PS050:
+    Name: FREQUENCY OF GETTING TOGETHER WITH FAMILY (RELATIVES)
+    Type: category # todo ordinal?
+    DataType: uint8[pyarrow]
+    Range: [ 1, 2, 3, 4, 5, 6, 99 ]
+
+  PS060:
+    Name: FREQUENCY OF GETTING TOGETHER WITH FRIENDS
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 6
+
+  PS070:
+    Name: FREQUENCY OF CONTACTS WITH FAMILY (RELATIVES)
+    Type: category # todo ordinal?
+    DataType: uint8[pyarrow]
+    Range: [ 1, 2, 3, 4, 5, 6, 99 ]
+
+  PS080:
+    Name: FREQUENCY OF CONTACTS WITH FRIENDS
+    Type: ordinal
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 6
+
+  PS110:
+    Name: PARTICIPATION IN FORMAL VOLUNTARY ACTIVITIES
+    Type: category # todo splittable?
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 6
+
+  PS111:
+    Name: PARTICIPATION IN INFORMAL VOLUNTARY ACTIVITIES
+    Type: indicator
+
+  PS102:
+    Name: ACTIVE CITIZENSHIP
+    Type: category # todo splittable?
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 4
+
+  PS011:
+    Name: NOT GOING TO THE CINEMA DUE TO THE COVID-19 CRISIS (OPTIONAL)
+    Type: indicator
+
+  PS021:
+    Name: NOT GOING TO LIVE PERFORMANCES (PLAYS, CONCERTS, OPERAS, BALLET AND DANCE PERFORMANCES) DUE TO THE COVID-19 CRISIS (OPTIONAL)
+    Type: indicator
+
+  PS031:
+    Name: NOT VISITING CULTURAL SITES DUE TO THE COVID-19 CRISIS (OPTIONAL)
+    Type: indicator
+
+  PS040B:
+    Name: NOT ATTENDING LIVE SPORT EVENTS DUE TO COVID-19 CRISIS (OPTIONAL)
+    Type: indicator
+
+  PL220:
+    Name: WORKING FROM HOME DURING PANDEMIC (OPTIONAL)
+    Type: category  # todo splittable?
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 6
+
+  PH051:
+    Name: UNMET NEED FOR MEDICAL EXAMINATION OR TREATMENT DUE TO COVID-19 CRISIS (OPTIONAL)
+    Type: indicator
+
+  PH071:
+    Name: UNMET NEED FOR DENTAL EXAMINATION OR TREATMENT DUE TO COVID-19 CRISIS (OPTIONAL)
+    Type: indicator
+
+  PMH010:
+    Name: MENTAL HEALTH AFFECTED BY THE COVID-19 CRISIS (OPTIONAL)
+    Type: ordinal  # todo splittable, needs a map
+    DataType: uint8[pyarrow]
+    Range:
+      Min: 1
+      Max: 3
+
+  PX010:
+    Name: Change rate
+    Type: #TODO
+    Extra: [ "Calculated", "NotFlagged" ]
+
+  PX020:
+    Name: Age at the end of the income reference period
+    Type: ordinal
+    DataType: int8[pyarrow]
+    Extra: [ "Calculated", "Capped", "NotFlagged" ]
+    Range:
+      Min: -1
+      Max: 80
+
+  PX030:
+    Name: Household identification number
+    Type: id
+    Extra: [ "Calculated", "NotFlagged" ]
+
+  PX040:
+    Name: Selected respondent status
+    Type: #TODO
+    Extra: [ "Calculated", "NotFlagged" ]
+
+  PX050:
+    Name: Activity status
+    Type: category
+    DataType: uint8[pyarrow]
+    Extra: [ "Calculated", "NotFlagged" ]
+    Range:
+      Min: 1
+      Max: 8
+      # TODO find application range

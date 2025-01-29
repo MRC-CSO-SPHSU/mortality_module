@@ -2,7 +2,6 @@ from numpy import uint16, ceil, linspace
 from pandas import DataFrame, MultiIndex
 from itertools import product
 import mortality_module
-from mortality_module.utils.constants import AGE_GROUPS, SEX_LABELS, COUNTRY_CODES
 import matplotlib.pylab as plt
 import warnings
 
@@ -30,12 +29,7 @@ class Ageing:
         self.end_year = end_year
         self._validate_dates()
 
-        indices = product(
-            range(self.start_year, (self.end_year + 2)),
-            SEX_LABELS,
-            AGE_GROUPS,
-            COUNTRY_CODES,
-        )
+        indices = range(1, 2)
 
         self.index = [
             (year_, sex, age, country_name) for year_, sex, age, country_name in indices

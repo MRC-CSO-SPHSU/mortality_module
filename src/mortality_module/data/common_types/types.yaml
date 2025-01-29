@@ -1,0 +1,13 @@
+shared:
+  id_: "uint64[pyarrow]"
+  total_: "uint8[pyarrow]"
+  ordinal_: "uint16[pyarrow]"
+  indicator_: "bool[pyarrow]"
+  category_: "category"
+
+usoc:
+  income_: "int32[pyarrow]"
+  mlb_: "bool[pyarrow]"
+
+eusilc:
+  income_: "uint32[pyarrow]"

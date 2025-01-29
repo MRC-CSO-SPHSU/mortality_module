@@ -1,0 +1,31 @@
+Main: [
+  a_indall,
+  a_hhresp,
+  a_indresp,
+  a_youth,
+  a_child,
+  a_egoalt,
+  a_income
+]
+
+Cross_wave: [
+  xwavedat,
+  xwaveid,
+  xhhrel
+]
+
+Children: [
+  a_natchild,
+  a_adopt
+]
+
+Adult_information: [
+  a_marriage,
+  a_cohabit,
+  a_empstat
+]
+
+Paradata: [
+  a_hhsamp,
+  a_callrec
+]

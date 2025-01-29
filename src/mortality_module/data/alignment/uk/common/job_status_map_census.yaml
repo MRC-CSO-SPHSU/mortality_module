@@ -1,0 +1,16 @@
+1: 2 # Employed Part-time
+2: 1 # Employed Full-time
+3: 4 # Self-employed Part-time
+4: 3 # Self-employed Full-time
+5: 4 # Self-employed Part-time
+6: 3 # Self-employed Full-time
+7: 5 # Unemployed
+8: 7 # Student (Employed Part-time)
+9: 6 # Student (Employed Full-time)
+10: 8 # Student (Self-employed)
+11: 9 # Student (Unemployed)
+12: 10 # Retired
+13: 9 # Student (Unemployed)
+14: 11 # Family care or home
+15: 12 # Long-term sick or disabled
+16: 13 # Other

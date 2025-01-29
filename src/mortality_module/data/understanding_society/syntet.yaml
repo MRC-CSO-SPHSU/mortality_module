@@ -1,0 +1,16 @@
+MAX_CHILDREN: 6
+
+MAP_PA:
+  id_: "uint64[pyarrow]"
+
+  ordinal_: "uint8[pyarrow]"
+  total_: "uint8[pyarrow]"
+  category_: "uint8[pyarrow]"
+
+  hours_: "uint8[pyarrow]"
+  minutes_: "uint16[pyarrow]"
+
+  income_: "int32[pyarrow]"
+
+  indicator_: "bool[pyarrow]"
+  mlb_": "bool[pyarrow]"
