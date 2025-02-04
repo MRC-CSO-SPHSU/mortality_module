@@ -3,9 +3,9 @@ import string
 from pathlib import Path
 from typing import Tuple
 
-from mortality_module.utils.general import path_validation
+from synthwave.utils.general import path_validation
 
-from mortality_module.utils.uk.preprocessing import process_households, scale_sample
+from synthwave.utils.uk.preprocessing import process_households, scale_sample
 from importlib.resources import files
 
 import pandas as pd
@@ -15,11 +15,11 @@ import yaml
 
 USOC_NAME_MAP = {}
 
-METADATA = yaml.safe_load(files("mortality_module.data.understanding_society").joinpath('name_map.yaml').read_text())
+METADATA = yaml.safe_load(files("synthwave.data.understanding_society").joinpath('name_map.yaml').read_text())
 
-DEFAULT_OPCODES = yaml.safe_load(files("mortality_module.data.understanding_society").joinpath('opcodes.yaml').read_text())
+DEFAULT_OPCODES = yaml.safe_load(files("synthwave.data.understanding_society").joinpath('opcodes.yaml').read_text())
 
-MAX_CHILDREN = yaml.safe_load(files("mortality_module.data.understanding_society").joinpath('syntet.yaml').read_text())["MAX_CHILDREN"]
+MAX_CHILDREN = yaml.safe_load(files("synthwave.data.understanding_society").joinpath('syntet.yaml').read_text())["MAX_CHILDREN"]
 
 def format_column_name(_group: str, _native_name: str) -> str:
     def _formatter(_g: str, _dict: dict) -> str:

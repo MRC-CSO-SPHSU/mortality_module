@@ -127,7 +127,7 @@ The code converts existing classes and divisions to the classification used in U
 ```python
 import pandas as pd
 
-from mortality_module.utils.uk.sic2007 import *
+from synthwave.utils.uk.sic2007 import *
 
 df_list = []
 

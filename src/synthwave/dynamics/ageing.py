@@ -1,7 +1,7 @@
 from numpy import uint16, ceil, linspace
 from pandas import DataFrame, MultiIndex
 from itertools import product
-import mortality_module
+import synthwave
 import matplotlib.pylab as plt
 import warnings
 
@@ -122,9 +122,9 @@ class Ageing:
 
 
 if __name__ == "__main__":
-    cen = mortality_module.load_census_data()
-    mo = mortality_module.load_mortality_rates()
-    b = mortality_module.load_birth_numbers()
+    cen = synthwave.load_census_data()
+    mo = synthwave.load_mortality_rates()
+    b = synthwave.load_birth_numbers()
     a = Ageing(cen, mo, b)
     data = a.run()
     data.to_csv("result.csv")

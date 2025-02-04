@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 import torch
 
-from mortality_module.utils.general import path_validation
+from synthwave.utils.general import path_validation
 
 # no country link, no particular dataset link, universal methods
 

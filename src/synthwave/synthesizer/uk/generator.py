@@ -4,27 +4,27 @@ import logging
 import pandas as pd
 from tqdm.notebook import tqdm
 
-from mortality_module.utils.general import generate_household_id, \
+from synthwave.utils.general import generate_household_id, \
     generate_personal_ids
-from mortality_module.utils.procrustes import Procrustes
+from synthwave.utils.procrustes import Procrustes
 
 logger = logging.getLogger(__name__)
 
 import pyarrow as pa
 from rdt.transformers import FloatFormatter
 from sdv.single_table import CTGANSynthesizer
-from mortality_module.synthesizer.utils import metadata_constructor, clean_imputed_data
-#from mortality_module.utils.uk.alignment_census import map_qualification, get_coarse_mapping
+from synthwave.synthesizer.utils import metadata_constructor, clean_imputed_data
+#from synthwave.utils.uk.alignment_census import map_qualification, get_coarse_mapping
 
-from mortality_module.synthesizer.uk.constraints import *
+from synthwave.synthesizer.uk.constraints import *
 from sdv.constraints import create_custom_constraint_class
-from mortality_module.synthesizer.abstract.axolotl_tank import assign_household_id
+from synthwave.synthesizer.abstract.axolotl_tank import assign_household_id
 import re
 import yaml
 
 import joblib
 
-from mortality_module.synthesizer.axolotl_tank import get_optimal_features
+from synthwave.synthesizer.axolotl_tank import get_optimal_features
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from importlib.resources import files
@@ -34,7 +34,7 @@ logger.info("start")
 HOUSEHOLD_ID_MAP = {_v: _i  for _i, _v in enumerate(["a0", "a1+", "c0", "c1", "c2", "c3+", "m2", "m3", "mc3", "m4", "mc4"])}
 # their relative order is irrelevant at the moment as long as it is the same across all data
 
-MAX_CHILDREN = yaml.safe_load(files("mortality_module.data.understanding_society").joinpath('syntet.yaml').read_text())["MAX_CHILDREN"]
+MAX_CHILDREN = yaml.safe_load(files("synthwave.data.understanding_society").joinpath('syntet.yaml').read_text())["MAX_CHILDREN"]
 
 adults = pd.read_csv("~/Work/IHW/datasets/out10.csv", dtype_backend="pyarrow")
 

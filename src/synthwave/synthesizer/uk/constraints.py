@@ -1,6 +1,6 @@
 import pandas as pd
 
-from mortality_module.synthesizer.abstract.constraints import CustomConstraint
+from synthwave.synthesizer.abstract.constraints import CustomConstraint
 
 TARGET_ORDER = (
     ("indicator_person_is_self_employed", 0),

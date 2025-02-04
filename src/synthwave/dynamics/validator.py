@@ -4,7 +4,7 @@ from numpy import dtype, isinf
 from pandas import DataFrame
 import re
 
-from mortality_module.utils.constants import *
+from synthwave.utils.constants import *
 
 
 def validate_column_names(df: DataFrame, names: list[str, ...]) -> None:
