@@ -33,7 +33,7 @@ setup(
     python_requires=">=3.12",
     install_requires=["pyarrow>=19.0.0",
                       "tqdm>=4.66.5",
-                      "yaml>=0.2.5",
+                      "pyyaml>=6.0.2",
                       "scikit-learn>=1.6.1",
                       "sdv>=1.17.3",
                       "torch>=2.5.1"
